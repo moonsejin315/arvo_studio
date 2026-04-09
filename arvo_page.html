@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#f6f4ef" />
+  <title>ARVO STUDIO — 두피문신 SMP | 서울 성수</title>
+  <meta name="description" content="ARVO 아르보 | 서울 두피문신 SMP | 0.1mm Micro Dot | 가장 나다운 라인 설계 | 2026.05 Open" />
+
+  <!-- Pretendard — 한국어 가독성 최고, 현대적 고딕 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+  <!-- Playfair Display — ARVO 영문 로고·브랜드 요소 전용 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet" />
+
+  <style>
+    :root{
+      --bg:#f6f4ef;--bg2:#edeae3;--text:#1c1a17;--muted:#6e6b63;--dim:#a8a49c;
+      --line:rgba(28,26,23,.1);--line2:rgba(28,26,23,.2);
+      /* 폰트 변수 */
+      --display:'Playfair Display',Georgia,serif; /* 영문 브랜드 요소 전용 */
+      --kr:'Pretendard','Apple SD Gothic Neo','Malgun Gothic',sans-serif; /* 모든 한글 */
+      --sans:'Pretendard','Apple SD Gothic Neo','Malgun Gothic',sans-serif; /* 바디 */
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+    html{scroll-behavior:smooth;}
+    body{
+      background:var(--bg);color:var(--text);
+      font-family:var(--sans);font-weight:400;font-size:15px;
+      line-height:1.75;word-break:keep-all;overflow-wrap:break-word;
+      -webkit-font-smoothing:antialiased;
+    }
+    .eyebrow{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--dim);font-weight:400;font-family:var(--sans);}
+    .btn-p{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 28px;min-height:46px;background:var(--text);color:var(--bg);font-family:var(--sans);font-size:13px;font-weight:500;letter-spacing:.04em;text-decoration:none;border:none;cursor:pointer;transition:opacity .2s;white-space:nowrap;}
+    .btn-p:hover{opacity:.82;}
+    .btn-s{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 28px;min-height:46px;background:transparent;color:var(--muted);font-family:var(--sans);font-size:13px;font-weight:400;letter-spacing:.04em;text-decoration:none;border:1px solid var(--line2);cursor:pointer;transition:color .2s,border-color .2s;white-space:nowrap;}
+    .btn-s:hover{color:var(--text);border-color:var(--text);}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+    @keyframes marqueeScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+    @keyframes pulse{0%,100%{opacity:.7;transform:scale(1)}50%{opacity:1;transform:scale(1.3)}}
+
+    /* ── NAV ── */
+    #nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:0 24px;height:58px;border-bottom:1px solid transparent;transition:background .3s,border-color .3s;}
+    #nav.scrolled{background:rgba(246,244,239,.96);border-color:var(--line);backdrop-filter:blur(10px);}
+    .nav-logo{font-family:var(--display);font-size:16px;letter-spacing:.18em;text-decoration:none;color:var(--text);font-style:italic;white-space:nowrap;font-weight:400;}
+    .nav-links{display:none;align-items:center;gap:12px;}
+    .nav-link{font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);text-decoration:none;border:1px solid var(--line2);padding:7px 16px;transition:color .2s,border-color .2s;white-space:nowrap;font-family:var(--sans);}
+    .nav-link:hover{color:var(--text);border-color:var(--text);}
+    .hamburger{background:none;border:none;cursor:pointer;display:flex;flex-direction:column;gap:5px;padding:8px;min-width:44px;min-height:44px;align-items:center;justify-content:center;}
+    .hbar{display:block;width:22px;height:1.5px;background:var(--text);transition:transform .25s,opacity .25s;}
+    #drawer{position:fixed;inset:0;z-index:199;background:var(--bg);display:none;flex-direction:column;justify-content:center;align-items:center;gap:18px;padding-top:58px;animation:fadeIn .22s ease both;}
+    #drawer.open{display:flex;}
+    .drawer-link{font-size:13px;letter-spacing:.1em;color:var(--text);text-decoration:none;border:1px solid var(--line2);padding:12px 28px;text-align:center;min-width:160px;display:flex;align-items:center;justify-content:center;font-family:var(--sans);}
+
+    /* ── FLOAT CTA — 동일 너비 고정 ── */
+    #floatCta{position:fixed;right:20px;bottom:28px;z-index:300;display:flex;flex-direction:column;gap:10px;align-items:stretch;width:158px;}
+    .float-btn{display:flex;align-items:center;justify-content:flex-start;gap:9px;padding:11px 16px;min-height:46px;width:100%;border:none;cursor:pointer;font-family:var(--sans);font-size:12px;font-weight:500;letter-spacing:.03em;text-decoration:none;box-shadow:0 4px 18px rgba(0,0,0,.14);transition:opacity .2s,transform .18s;white-space:nowrap;}
+    .float-btn:hover{opacity:.88;transform:translateY(-1px);}
+    .float-btn.ig{background:var(--text);color:var(--bg);}
+    .float-icon{font-size:15px;line-height:1;flex-shrink:0;}
+
+    /* ── HERO ── */
+    #hero{border-bottom:1px solid var(--line);padding-top:58px;position:relative;overflow:hidden;}
+    #hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(168,164,156,.2) 1.2px,transparent 1.2px);background-size:22px 22px;pointer-events:none;}
+
+    .hero-inner{max-width:1200px;margin:0 auto;padding:60px 24px 72px;display:grid;grid-template-columns:1fr;gap:36px;position:relative;z-index:1;}
+
+    /* 헤드라인 — Pretendard 사용, 이탤릭 없음 */
+    .hero-headline{
+      font-family:var(--kr);
+      font-size:clamp(30px,5vw,58px);
+      font-weight:700;
+      font-style:normal;
+      line-height:1.22;
+      white-space:pre-line;
+      word-break:keep-all;
+      letter-spacing:-.02em;
+      animation:fadeUp .8s .1s both;
+    }
+
+    .hero-right{display:flex;flex-direction:column;gap:24px;animation:fadeUp .8s .3s both;}
+    .hero-sub{font-family:var(--kr);font-size:14px;font-weight:400;line-height:1.95;color:var(--muted);white-space:pre-line;word-break:keep-all;}
+    .hero-dot-label{display:block;font-family:var(--sans);font-size:10px;letter-spacing:.22em;color:var(--dim);margin-bottom:10px;text-transform:uppercase;}
+
+    /* 오픈 배지 — 눈에 잘 보이도록 다크 배경 */
+    .hero-open-badge{
+      display:inline-flex;align-items:center;gap:10px;
+      background:var(--text);color:var(--bg);
+      padding:11px 20px;
+      font-family:var(--sans);font-size:13px;font-weight:600;
+      letter-spacing:.04em;
+      align-self:flex-start;
+    }
+    .hero-open-dot{
+      width:7px;height:7px;border-radius:50%;
+      background:#4ade80; /* 초록 — 라이브 표시 */
+      flex-shrink:0;
+      animation:pulse 2s infinite;
+    }
+
+    /* 0.1 타이포그래픽 시각 요소 */
+    .hero-visual{display:flex;flex-direction:column;align-items:flex-start;gap:4px;}
+    .hero-visual-num{font-family:var(--display);font-size:clamp(56px,10vw,110px);font-style:italic;font-weight:400;line-height:1;color:rgba(28,26,23,.07);letter-spacing:-.02em;user-select:none;}
+    .hero-visual-label{font-size:9px;letter-spacing:.24em;text-transform:uppercase;color:var(--dim);font-family:var(--sans);}
+
+    /* ── MARQUEE ── */
+    .ticker{background:var(--text);overflow:hidden;padding:13px 0;}
+    .ticker-track{display:flex;align-items:center;white-space:nowrap;animation:marqueeScroll 28s linear infinite;width:max-content;}
+    .ticker-item{font-family:var(--display);font-style:italic;font-size:15px;font-weight:400;color:rgba(246,244,239,.7);padding:0 28px;letter-spacing:.06em;}
+    .ticker-sep{color:rgba(246,244,239,.2);font-size:14px;padding:0 4px;}
+
+    /* ── HOOK ── */
+    #hook{border-bottom:1px solid var(--line);background:var(--bg2);user-select:none;}
+    .hook-inner{max-width:1200px;margin:0 auto;padding:52px 24px;}
+    .hook-content{touch-action:pan-y;cursor:grab;min-height:160px;}
+    .hook-content:active{cursor:grabbing;}
+    .hook-main{
+      font-family:var(--kr);
+      font-size:clamp(22px,3.6vw,46px);
+      font-weight:600;font-style:normal;
+      line-height:1.32;margin-bottom:16px;
+      white-space:pre-line;word-break:keep-all;letter-spacing:-.01em;
+    }
+    .hook-sub{font-family:var(--kr);font-size:14px;font-weight:400;line-height:1.9;color:var(--muted);max-width:520px;word-break:keep-all;min-height:52px;}
+    .hook-controls{display:flex;align-items:center;justify-content:space-between;margin-top:28px;}
+    .hook-dots{display:flex;gap:8px;align-items:center;}
+    .hook-dot{height:4px;border-radius:2px;border:none;cursor:pointer;padding:0;transition:width .3s,background .3s;}
+    .hook-arrows{display:flex;gap:8px;}
+    .arrow-btn{width:38px;height:38px;display:flex;align-items:center;justify-content:center;background:transparent;border:1px solid var(--line2);cursor:pointer;font-size:14px;color:var(--muted);transition:background .18s,color .18s;font-family:var(--sans);}
+    .arrow-btn:hover{background:var(--text);color:var(--bg);}
+
+    /* ── BRAND ── */
+    #brand{border-bottom:1px solid var(--line);}
+    .section-inner{max-width:1200px;margin:0 auto;padding:52px 24px;}
+    .section-headline{font-family:var(--kr);font-weight:600;line-height:1.35;white-space:pre-line;word-break:keep-all;letter-spacing:-.01em;}
+    .val-grid{display:grid;grid-template-columns:repeat(2,1fr);border:1px solid var(--line);}
+    .val-cell{padding:22px;position:relative;overflow:hidden;}
+    .val-cell::before{content:attr(data-letter);position:absolute;right:-6px;bottom:-14px;font-family:var(--display);font-style:italic;font-weight:400;font-size:72px;line-height:1;color:rgba(28,26,23,.05);pointer-events:none;user-select:none;}
+    .val-num{display:block;font-family:var(--display);font-size:13px;color:var(--text);letter-spacing:.04em;margin-bottom:6px;font-style:italic;font-weight:500;}
+    .val-title{font-size:12px;font-weight:600;margin-bottom:5px;letter-spacing:.02em;color:var(--muted);font-family:var(--sans);}
+    .val-desc{font-size:12px;color:var(--muted);line-height:1.82;word-break:keep-all;font-family:var(--kr);}
+
+    /* ── SERVICES ── */
+    #services{border-bottom:1px solid var(--line);background:var(--bg2);}
+    .svc-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;}
+    .svc-title-text{font-family:var(--display);font-size:26px;font-weight:400;font-style:italic;}
+    .svc-row{display:grid;grid-template-columns:34px 1fr auto;align-items:center;gap:16px;padding:18px 10px;border-bottom:1px solid var(--line);transition:background .18s;}
+    .svc-row:first-of-type{border-top:1px solid var(--line);}
+    .svc-row:hover{background:rgba(28,26,23,.025);}
+    .svc-idx{font-family:var(--display);font-size:11px;color:var(--dim);font-style:italic;}
+    .svc-name{font-family:var(--kr);font-size:14px;font-weight:600;margin-bottom:2px;word-break:keep-all;}
+    .svc-desc{font-size:12px;color:var(--muted);word-break:keep-all;font-family:var(--kr);}
+
+    /* ── LAUNCH ── */
+    #launch{border-bottom:1px solid var(--line);}
+    .chip{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;min-height:38px;border:1px solid var(--line2);font-size:12px;font-family:var(--sans);cursor:pointer;transition:all .15s;background:transparent;color:var(--muted);}
+    .chip.active{background:var(--text);color:var(--bg);border-color:var(--text);font-weight:600;}
+    .chip:not(.active):hover{border-color:var(--muted);color:var(--text);}
+    .d-row{display:grid;grid-template-columns:110px 1fr 28px;align-items:center;gap:10px;}
+    .d-track{height:2px;background:rgba(28,26,23,.1);border-radius:1px;overflow:hidden;}
+    .d-fill{height:100%;background:var(--text);border-radius:1px;transition:width .8s ease;}
+
+    /* ── CTA ── */
+    #cta{border-bottom:1px solid var(--line);background:var(--bg2);}
+    .cta-wrap{display:flex;flex-direction:column;align-items:center;text-align:center;}
+    .blog-link{display:inline-flex;align-items:center;gap:6px;margin-top:16px;font-size:12px;color:var(--muted);text-decoration:none;letter-spacing:.04em;transition:color .2s;border-bottom:1px solid var(--line2);padding-bottom:2px;font-family:var(--sans);}
+    .blog-link:hover{color:var(--text);border-color:var(--text);}
+
+    /* ── FOOTER ── */
+    footer{border-top:1px solid var(--line);}
+    .lang-row{display:flex;align-items:center;gap:6px;flex-wrap:nowrap;overflow-x:auto;padding-bottom:4px;margin-bottom:22px;scrollbar-width:none;}
+    .lang-row::-webkit-scrollbar{display:none;}
+    .lang-btn{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;min-height:34px;flex-shrink:0;border:1px solid var(--line2);cursor:pointer;font-family:var(--sans);background:transparent;transition:all .18s;}
+    .lang-btn.active{background:var(--text);border-color:var(--text);}
+    .lang-btn .flag{font-size:15px;line-height:1;}
+    .lang-btn .lname{font-size:11px;letter-spacing:.04em;}
+    .lang-btn.active .lname{color:var(--bg);font-weight:600;}
+    .lang-btn:not(.active) .lname{color:var(--muted);}
+    .lang-btn:not(.active):hover .lname{color:var(--text);}
+    .footer-bottom{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;border-top:1px solid var(--line);padding-top:20px;}
+    .footer-logo-text{font-family:var(--display);font-size:14px;letter-spacing:.2em;font-style:italic;font-weight:400;}
+    .footer-copy{font-size:11px;color:var(--dim);font-family:var(--sans);}
+    .footer-link{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s;font-family:var(--sans);}
+    .footer-link:hover{color:var(--text);}
+    .footer-links{display:flex;gap:16px;align-items:center;}
+
+    /* ── REVEAL ── */
+    .reveal{opacity:0;transform:translateY(18px);transition:opacity .8s ease,transform .8s ease;}
+    .reveal.in{opacity:1;transform:translateY(0);}
+
+    /* ── LOADING STATE ── */
+    .counts-loading{font-size:11px;color:var(--dim);font-style:italic;padding:4px 0;}
+
+    /* ── RESPONSIVE ── */
+    @media(min-width:768px){
+      #nav{padding:0 48px;}
+      .hamburger{display:none!important;}
+      .nav-links{display:flex;}
+      .hero-inner{grid-template-columns:3fr 2fr;padding:80px 48px 88px;gap:80px;align-items:center;}
+      .section-inner{padding-left:48px!important;padding-right:48px!important;}
+      #cta .section-inner{padding-top:88px!important;padding-bottom:88px!important;}
+      footer .section-inner{padding-bottom:80px!important;}
+      .hero-visual{align-items:flex-end;}
+    }
+    @media(max-width:767px){
+      #floatCta{right:14px;bottom:20px;width:150px;}
+      .hero-open-badge{font-size:12px;padding:10px 16px;}
+    }
+  </style>
+</head>
+<body>
+
+<!-- ════════ NAV ════════ -->
+<nav id="nav">
+  <a href="#" class="nav-logo">ARVO STUDIO</a>
+  <div class="nav-links">
+    <a href="https://blog.naver.com/the_arvo_studio" target="_blank" class="nav-link" id="navBlog">블로그</a>
+    <a href="https://www.instagram.com/the_arvo_studio/" target="_blank" class="nav-link" id="navIg">Instagram ↗</a>
+  </div>
+  <button class="hamburger" id="hamburger" aria-label="메뉴">
+    <span class="hbar" id="hb0"></span>
+    <span class="hbar" id="hb1"></span>
+    <span class="hbar" id="hb2"></span>
+  </button>
+</nav>
+
+<div id="drawer">
+  <a href="https://blog.naver.com/the_arvo_studio" target="_blank" class="drawer-link" id="drawerBlog">블로그</a>
+  <a href="https://www.instagram.com/the_arvo_studio/" target="_blank" class="drawer-link" id="drawerIg">Instagram ↗</a>
+</div>
+
+<!-- ════════ FLOAT CTA ════════ -->
+<div id="floatCta">
+  <a href="https://www.instagram.com/the_arvo_studio/" target="_blank" class="float-btn ig">
+    <span class="float-icon">📷</span>
+    <span id="f-ig">Instagram 문의</span>
+  </a>
+  <!-- 정식 오픈 후: 한/영→카카오, 일본어→LINE, 중국어→WeChat href 교체 -->
+  <a href="#" target="_blank" class="float-btn" id="floatSecond">
+    <span class="float-icon">💬</span>
+    <span id="f-second">카카오 상담</span>
+  </a>
+</div>
+
+<main>
+
+<!-- ════════ HERO ════════ -->
+<section id="hero">
+  <div class="hero-inner">
+    <!-- 왼쪽: 헤드라인 -->
+    <div>
+      <p class="eyebrow" id="h-eyebrow" style="margin-bottom:20px;animation:fadeUp .8s .05s both;display:block;"></p>
+      <h1 class="hero-headline" id="h-headline"></h1>
+    </div>
+
+    <!-- 오른쪽 -->
+    <div class="hero-right">
+      <!-- 오픈 배지 — 검정 배경, 초록 점 -->
+      <div class="hero-open-badge">
+        <span class="hero-open-dot"></span>
+        <span id="h-openbadge">2026 · 05 · Seoul Open</span>
+      </div>
+
+      <p class="hero-sub">
+        <span class="hero-dot-label" id="h-dot"></span>
+        <span id="h-sub"></span>
+      </p>
+
+      <!-- 0.1mm 타이포그래픽 시각 요소 -->
+      <div class="hero-visual">
+        <div class="hero-visual-num">0.1</div>
+        <span class="hero-visual-label" id="h-visual-label">mm Micro Dot</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ MARQUEE ════════ -->
+<div class="ticker"><div class="ticker-track" id="tickerTrack"></div></div>
+
+<!-- ════════ HOOK CAROUSEL ════════ -->
+<section id="hook">
+  <div class="hook-inner">
+    <p class="eyebrow" id="hook-label" style="margin-bottom:22px;"></p>
+    <div class="hook-content" id="hookContent">
+      <h2 class="hook-main" id="hook-main"></h2>
+      <p class="hook-sub" id="hook-sub"></p>
+    </div>
+    <div class="hook-controls">
+      <div class="hook-dots" id="hookDots"></div>
+      <div class="hook-arrows">
+        <button class="arrow-btn" id="hookPrev">←</button>
+        <button class="arrow-btn" id="hookNext">→</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ BRAND ════════ -->
+<section id="brand" class="reveal">
+  <div class="section-inner">
+    <p class="eyebrow" id="b-label" style="margin-bottom:14px;"></p>
+    <h2 class="section-headline" id="b-headline" style="font-size:clamp(20px,2.8vw,38px);margin-bottom:30px;"></h2>
+    <div class="val-grid" id="valGrid"></div>
+  </div>
+</section>
+
+<!-- ════════ SERVICES ════════ -->
+<section id="services" class="reveal">
+  <div class="section-inner">
+    <div class="svc-header">
+      <h2 class="svc-title-text" id="s-label"></h2>
+      <span class="eyebrow" id="s-note"></span>
+    </div>
+    <div id="svcList"></div>
+  </div>
+</section>
+
+<!-- ════════ LAUNCH REQUEST ════════ -->
+<section id="launch" class="reveal">
+  <div class="section-inner">
+    <p class="eyebrow" id="l-label" style="margin-bottom:12px;"></p>
+    <h2 class="section-headline" id="l-headline" style="font-size:clamp(22px,3.2vw,40px);margin-bottom:10px;"></h2>
+    <p id="l-sub" style="font-size:13px;color:var(--muted);line-height:1.85;margin-bottom:26px;word-break:keep-all;max-width:480px;"></p>
+    <div id="launchForm"></div>
+    <div id="launchDone" style="display:none;animation:fadeUp .5s ease both;"></div>
+  </div>
+</section>
+
+<!-- ════════ CTA ════════ -->
+<section id="cta" class="reveal">
+  <div class="section-inner cta-wrap" style="padding-top:72px;padding-bottom:72px;">
+    <p class="eyebrow" id="c-label" style="margin-bottom:16px;"></p>
+    <h2 class="section-headline" id="c-headline" style="font-size:clamp(24px,3.8vw,48px);margin-bottom:14px;"></h2>
+    <p id="c-sub" style="font-size:14px;color:var(--muted);line-height:1.85;margin-bottom:28px;max-width:360px;word-break:keep-all;"></p>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center;">
+      <a href="https://www.instagram.com/the_arvo_studio/" target="_blank" class="btn-p" id="c-cta1"></a>
+      <a href="#" target="_blank" class="btn-s" id="c-cta2"></a>
+    </div>
+    <a href="https://blog.naver.com/the_arvo_studio" target="_blank" class="blog-link" id="c-blog"></a>
+  </div>
+</section>
+
+</main>
+
+<!-- ════════ FOOTER ════════ -->
+<footer>
+  <div class="section-inner" style="padding-top:36px;padding-bottom:72px;">
+    <div class="lang-row">
+      <span class="eyebrow" id="f-langlabel" style="margin-right:6px;flex-shrink:0;"></span>
+      <button class="lang-btn" data-lang="ko"><span class="flag">🇰🇷</span><span class="lname">한국어</span></button>
+      <button class="lang-btn" data-lang="en"><span class="flag">🇺🇸</span><span class="lname">English</span></button>
+      <button class="lang-btn" data-lang="ja"><span class="flag">🇯🇵</span><span class="lname">日本語</span></button>
+      <button class="lang-btn" data-lang="zh"><span class="flag">🇨🇳</span><span class="lname">中文</span></button>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-logo-text">ARVO STUDIO</span>
+      <p class="footer-copy" id="f-copy"></p>
+      <div class="footer-links">
+        <a href="https://blog.naver.com/the_arvo_studio" target="_blank" class="footer-link" id="f-blog"></a>
+        <a href="https://www.instagram.com/the_arvo_studio/" target="_blank" class="footer-link">Instagram ↗</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ══════════════════════════════════════
+   ★ Google Apps Script 웹 앱 URL 여기에 붙여넣기
+   배포 후 아래 URL을 교체하세요
+══════════════════════════════════════ */
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz2dWMSdl2zQA-BtIVRnokR2pskhxrSQe3LljMzr8H0ts_BLZowWvhn2FL9GHP-4YFw/exec';
+
+/* 세션 ID — 페이지 로드마다 새로 생성 */
+const SESSION_ID = Math.random().toString(36).substr(2, 9);
+
+/* ══════════════════════════════════════
+   i18n
+══════════════════════════════════════ */
+const I18N = {
+  ko:{
+    nav:{ig:'Instagram ↗',blog:'블로그'},
+    float:{ig:'Instagram 문의',second:'카카오 상담'},
+    hero:{
+      eyebrow:'Personal Line & Dot Design Lab',
+      headline:'가장 나다운\n라인을\n설계합니다',
+      dotLabel:'0.1mm Micro Dot',
+      sub:'가장 나다운 결이 선사하는 세련된 자신감.\n개인별 두상에 최적화된 퍼스널 모근 설계.',
+      openBadge:'2026 · 05 · Seoul Open',
+      visualLabel:'mm Micro Dot',
+    },
+    ticker:['Authentic','Refined','Version','Original','0.1mm Precision','Personal Design','Natural First','One Detail'],
+    hooks:{
+      label:'이런 고민, 공감하시나요?',
+      items:[
+        {main:'업스타일이나 올백 헤어를 할 때\n헤어라인이 신경 쓰이시나요?',sub:'승무원, 결혼식, 중요한 자리 — 헤어라인이 드러나는 상황에서도 당당해지고 싶은 분들께.'},
+        {main:'사진 찍을 때\n두피 각도가 신경 쓰이시나요?',sub:'탈모가 심하지 않아도, 두피가 비치는 게 불편하신 분들도 충분히 받으실 수 있어요.'},
+        {main:'모자 없이는\n왠지 불안한 날이 늘었나요?',sub:'모자에 의존하는 것이 습관이 되었다면, 이제 다른 선택지를 고려해보세요.'},
+        {main:'세월이 느껴지는 두피를\n자연스럽게 커버하고 싶으신가요?',sub:'수술 없이 자연스럽게 풍성해 보이는 방법. 동안 효과와 함께 본연의 풍성함을 되찾을 수 있어요.'},
+        {main:'모발이식 후\n밀도가 아쉬우신가요?',sub:'이식 후 여전히 빈 느낌이 드는 부위, SMP로 촘촘하게 채울 수 있어요.'},
+        {main:'헤어스타일을\n포기한 적이 있나요?',sub:'헤어라인이나 숱이 신경 쓰여 원하는 스타일을 포기해왔다면, ARVO가 도와드릴게요.'},
+        {main:'굳이 탈모가\n아니어도 됩니다',sub:'헤어라인 교정, 밀도 보강 — 가볍게 개선하고 싶은 분들께도 열려 있어요.'},
+      ],
+    },
+    brand:{
+      label:'ARVO',
+      headline:'가장 나다운 결이\n선사하는 세련된 자신감',
+      values:[
+        {letter:'A',num:'[A] Authentic',title:'진정성',desc:'인위적이지 않은, 본연의 모근과 결을 살린 자연스러움.'},
+        {letter:'R',num:'[R] Refined',title:'정교함',desc:'0.1mm의 오차도 허용하지 않는 세련된 디자인과 전문성.'},
+        {letter:'V',num:'[V] Version',title:'변화',desc:'고객이 마주할 수 있는 생애 최고의 모습, Best Version 구현.'},
+        {letter:'O',num:'[O] Original',title:'본질',desc:'유행을 타지 않는, 개인별 두상과 골격에 최적화된 오리지널리티.'},
+      ],
+    },
+    services:{label:'Services',note:'오픈 시 상세 안내',cs:'Coming Soon',items:[
+      {idx:'01',name:'헤어라인 디자인 SMP',desc:'M자 · 원형 · 여성 헤어라인 정교한 복원'},
+      {idx:'02',name:'정수리·가르마 밀도 보강',desc:'업스타일 · 포니테일 라인까지 섬세한 설계'},
+      {idx:'03',name:'전체 두피 SMP',desc:'광범위 탈모 · 전두 시술'},
+      {idx:'04',name:'리터치',desc:'기존 시술 보완 · 유지 관리'},
+    ]},
+    launch:{
+      label:'Launch Request',headline:'우리 동네에도\n오픈해주세요',
+      sub:'원하시는 지역을 선택해주시면, 수요가 높은 지역부터 순차적으로 런칭을 검토합니다.',
+      submit:'런칭 요청하기',selected:'선택됨',etcPh:'지역을 직접 입력해주세요',
+      doneH:'요청이 접수되었습니다.',
+      doneS:'수요가 모이는 지역부터 우선 런칭을 검토할게요. 인스타그램을 팔로우하시면 오픈 소식을 가장 먼저 받아보실 수 있어요.',
+      demandLabel:'지역별 요청 현황',
+      regions:{seoul:'서울',gyeonggi:'경기',etc:'기타'},
+    },
+    cta:{label:'사전 문의',headline:'오픈 전,\n지금 바로 상담하세요',sub:'오픈 전 사전 상담 고객께는 우선 예약 기회를 드립니다.',cta1:'Instagram DM 문의',cta2:'카카오 채널 (준비 중)',blog:'블로그 더 보기 →'},
+    footer:{copy:'© 2026 ARVO Studio. Seoul.',langLabel:'Language',blog:'블로그'},
+  },
+  en:{
+    nav:{ig:'Instagram ↗',blog:'Blog'},
+    float:{ig:'Instagram DM',second:'KakaoTalk'},
+    hero:{eyebrow:'Personal Line & Dot Design Lab',headline:'Design the Line\nThat\'s\nTruly You',dotLabel:'0.1mm Micro Dot',sub:'Refined confidence drawn from your true essence.\nPersonalized scalp pigmentation, designed for you alone.',openBadge:'2026 · 05 · Seoul Open',visualLabel:'mm Micro Dot'},
+    ticker:['Authentic','Refined','Version','Original','0.1mm Precision','Personal Design','Natural First','One Detail'],
+    hooks:{label:'Can you relate?',items:[
+      {main:'Do you hesitate to style\nyour hair up or swept back?',sub:'For formal occasions, important moments — we design hairlines you can wear with confidence.'},
+      {main:'Do you worry about\nscalp visibility in photos?',sub:"You don't need severe hair loss — anyone bothered by scalp showing is welcome."},
+      {main:'Do you feel uneasy\nwithout a hat?',sub:"If reaching for a hat has become a habit, it's time to consider another option."},
+      {main:'Do you want to restore\nyouthful fullness naturally?',sub:'A non-surgical way to look naturally fuller. Subtle, elegant, and timeless results.'},
+      {main:'Want to improve density\nafter a hair transplant?',sub:'If your transplanted area still feels sparse, SMP can fill it in seamlessly.'},
+      {main:'Have you ever given up\non a hairstyle?',sub:'If your hairline or density has stopped you from styling freely, ARVO is here.'},
+      {main:"You don't need\nto have hair loss",sub:'Hairline refinement, density enhancement — open to anyone looking for subtle improvement.'},
+    ]},
+    brand:{label:'ARVO',headline:'Refined confidence drawn\nfrom your true essence',values:[
+      {letter:'A',num:'[A] Authentic',title:'Authenticity',desc:'Natural beauty rooted in your real follicles — never artificial.'},
+      {letter:'R',num:'[R] Refined',title:'Precision',desc:'Expert design that tolerates no deviation to 0.1mm.'},
+      {letter:'V',num:'[V] Version',title:'Evolution',desc:'Realizing the best version of you that you have yet to meet.'},
+      {letter:'O',num:'[O] Original',title:'Originality',desc:'Timeless design optimized for your unique head shape.'},
+    ]},
+    services:{label:'Services',note:'Details at opening',cs:'Coming Soon',items:[
+      {idx:'01',name:'Hairline Design SMP',desc:'M-shape · alopecia · feminine hairline restoration'},
+      {idx:'02',name:'Crown & Parting Density',desc:'Updo · ponytail hairline, delicate design'},
+      {idx:'03',name:'Full Scalp SMP',desc:'Extensive hair loss · full coverage'},
+      {idx:'04',name:'Touch-Up',desc:'Maintenance & refinement'},
+    ]},
+    launch:{label:'Launch Request',headline:'Open near me\nplease',sub:'Select your preferred area. We will prioritize locations based on demand.',submit:'Submit Request',selected:'selected',etcPh:'Enter your area',doneH:'Request received!',doneS:"We'll prioritize high-demand areas. Follow us on Instagram to get opening updates first.",demandLabel:'Demand by Area',regions:{seoul:'Seoul',gyeonggi:'Gyeonggi',etc:'Other'}},
+    cta:{label:'Consultation',headline:'Book your\npre-opening consult',sub:'Pre-opening consultations receive priority booking.',cta1:'Instagram DM',cta2:'KakaoTalk (coming soon)',blog:'Read our Blog →'},
+    footer:{copy:'© 2026 ARVO Studio. Seoul.',langLabel:'Language',blog:'Blog'},
+  },
+  ja:{
+    nav:{ig:'Instagram ↗',blog:'ブログ'},
+    float:{ig:'Instagram 相談',second:'LINE 相談'},
+    hero:{eyebrow:'Personal Line & Dot Design Lab',headline:'あなただけの\nラインを\nデザインします',dotLabel:'0.1mm マイクロドット',sub:'あなたらしさから生まれる洗練された自信。\n個人の頭型に最適化したパーソナル毛根デザイン。',openBadge:'2026 · 05 · ソウル Open',visualLabel:'mm マイクロドット'},
+    ticker:['Authentic','Refined','Version','Original','0.1mm 精密','パーソナルデザイン','Natural First','One Detail'],
+    hooks:{label:'こんなお悩み、ありませんか？',items:[
+      {main:'アップスタイルやオールバックのとき\nヘアラインが気になりますか？',sub:'フライトアテンダント、式典、大切な場面 — 自信を持ってヘアラインを見せられるようにします。'},
+      {main:'写真を撮るとき\n頭皮が気になりますか？',sub:'脱毛が深刻でなくても、頭皮が見えることが気になる方もご利用いただけます。'},
+      {main:'帽子なしでは\n不安になる日が増えましたか？',sub:'帽子に頼るのが習慣になっているなら、別の選択肢を考えてみませんか。'},
+      {main:'自然に若々しく\n豊かに見せたいですか？',sub:'手術なしで自然に豊かに見える方法。エレガントで上品、時代を超えた変化を。'},
+      {main:'植毛後も\n密度が物足りないですか？',sub:'移植後もまだ薄い感じがある部分、SMPで自然に補えます。'},
+      {main:'理想の髪型を\n諦めたことはありますか？',sub:'ヘアラインや髪の密度が気になってスタイルを妥協してきたなら、ARVOがお手伝いします。'},
+      {main:'脱毛でなくても\n大丈夫です',sub:'ヘアライン修正、密度補強 — 少し改善したい方にも開かれています。'},
+    ]},
+    brand:{label:'ARVO',headline:'あなたらしさから生まれる\n洗練された自信',values:[
+      {letter:'A',num:'[A] Authentic',title:'真正性',desc:'人工的でない、本来の毛根と質感を活かした自然さ。'},
+      {letter:'R',num:'[R] Refined',title:'精巧性',desc:'0.1mmの誤差も許さない、洗練されたデザインと専門性。'},
+      {letter:'V',num:'[V] Version',title:'進化',desc:'あなたが出会う最高の自分、ベストバージョンの実現。'},
+      {letter:'O',num:'[O] Original',title:'独自性',desc:'個人の頭型と骨格に最適化されたオリジナリティ。'},
+    ]},
+    services:{label:'Services',note:'オープン時に詳細をご案内',cs:'Coming Soon',items:[
+      {idx:'01',name:'ヘアラインデザインSMP',desc:'M字・円形・女性ヘアライン精密復元'},
+      {idx:'02',name:'頭頂部・分け目密度補強',desc:'アップスタイル・ポニーテールラインまで'},
+      {idx:'03',name:'全頭SMP',desc:'広範囲の脱毛・全体施術'},
+      {idx:'04',name:'タッチアップ',desc:'既存施術の補完・メンテナンス'},
+    ]},
+    launch:{label:'Launch Request',headline:'近くにも\nオープンしてください',sub:'ご希望のエリアをお選びください。需要の高い地域から順次展開を検討します。',submit:'リクエストを送る',selected:'選択中',etcPh:'地域を入力してください',doneH:'リクエストを受け付けました。',doneS:'需要の多い地域から優先的にオープンを検討します。インスタグラムをフォローしてオープン情報をいち早くご確認ください。',demandLabel:'エリア別リクエスト状況',regions:{seoul:'ソウル',gyeonggi:'京畿道',etc:'その他'}},
+    cta:{label:'事前相談',headline:'オープン前に\nご相談ください',sub:'事前相談のお客様には優先予約の機会をご提供します。',cta1:'Instagram DM で相談',cta2:'LINE（アカウント準備中）',blog:'ブログを読む →'},
+    footer:{copy:'© 2026 ARVO Studio. Seoul.',langLabel:'Language',blog:'ブログ'},
+  },
+  zh:{
+    nav:{ig:'Instagram ↗',blog:'博客'},
+    float:{ig:'Instagram 咨询',second:'WeChat 咨询'},
+    hero:{eyebrow:'Personal Line & Dot Design Lab',headline:'设计属于\n你的\n发际线',dotLabel:'0.1mm 微点技术',sub:'最真实的你所呈现的优雅自信。\n以个人头型为基础的专属毛囊设计。',openBadge:'2026 · 05 · 首尔 Open',visualLabel:'mm 微点技术'},
+    ticker:['Authentic','Refined','Version','Original','0.1mm 精准','个性化设计','Natural First','One Detail'],
+    hooks:{label:'您有这样的烦恼吗？',items:[
+      {main:'扎马尾或盘发时\n发际线让您烦恼吗？',sub:'无论是重要场合、婚礼还是日常造型，精致发际线让您随时自信。'},
+      {main:'拍照时总担心\n头皮会被拍到？',sub:'就算不是严重脱发，只要觉得头皮透出来不舒服，都可以来体验。'},
+      {main:'没戴帽子就\n感到不安？',sub:'如果帽子已经成了您的日常依赖，现在是时候考虑别的方案了。'},
+      {main:'希望自然地\n恢复年轻丰盈的发量？',sub:'无需手术，自然看起来更饱满。优雅而持久，经得起时光考验。'},
+      {main:'植发后密度\n还是不够满意？',sub:'移植后仍感觉稀疏的区域，可以通过SMP自然填补。'},
+      {main:'因为发际线而\n放弃过某个发型？',sub:'如果发际线或发量让您不敢尝试喜欢的造型，ARVO 来帮您。'},
+      {main:'不一定要\n脱发才能做',sub:'发际线修正、密度加强——有轻微改善需求的朋友同样欢迎。'},
+    ]},
+    brand:{label:'ARVO',headline:'源自本质之美\n所呈现的优雅自信',values:[
+      {letter:'A',num:'[A] Authentic',title:'真实性',desc:'不人工、不刻意，源自真实毛根与纹理的自然感。'},
+      {letter:'R',num:'[R] Refined',title:'精准性',desc:'不允许0.1mm误差的精准工艺与专业设计。'},
+      {letter:'V',num:'[V] Version',title:'蜕变',desc:'帮您实现此生最美好的状态，成为最好的自己。'},
+      {letter:'O',num:'[O] Original',title:'独特性',desc:'根据个人头型与骨骼优化的专属独创性。'},
+    ]},
+    services:{label:'服务项目',note:'开业后提供详细说明',cs:'Coming Soon',items:[
+      {idx:'01',name:'发际线设计 SMP',desc:'M形·斑秃·女性发际线精准修复'},
+      {idx:'02',name:'头顶·分缝密度加强',desc:'盘发·马尾发际线细致设计'},
+      {idx:'03',name:'全头 SMP',desc:'大面积脱发·全覆盖施术'},
+      {idx:'04',name:'补色维护',desc:'原有施术补充·日常维护'},
+    ]},
+    launch:{label:'开业请求',headline:'请在我家附近\n开业吧',sub:'请选择您希望的地区。我们将根据需求优先安排高需求地区的开业计划。',submit:'提交请求',selected:'已选择',etcPh:'请输入您的地区',doneH:'请求已收到！',doneS:'我们将优先考虑需求最多的地区。关注我们的 Instagram 即可第一时间获得开业消息。',demandLabel:'各地区需求情况',regions:{seoul:'首尔',gyeonggi:'京畿道',etc:'其他'}},
+    cta:{label:'预约咨询',headline:'开业前\n立即咨询',sub:'开业前预约咨询的顾客将获得优先预约机会。',cta1:'Instagram DM 咨询',cta2:'WeChat（账号准备中）',blog:'阅读博客 →'},
+    footer:{copy:'© 2026 ARVO Studio. Seoul.',langLabel:'Language',blog:'博客'},
+  },
+};
+
+const AREAS=[
+  {id:'gangnam', label:{ko:'강남·서초',en:'Gangnam·Seocho',ja:'江南·瑞草',zh:'江南·瑞草'},region:'seoul'},
+  {id:'hannam',  label:{ko:'한남·이태원',en:'Hannam·Itaewon',ja:'漢南·梨泰院',zh:'汉南·梨泰院'},region:'seoul'},
+  {id: 'seongsu_cluster', label: {ko: '성수·서울숲·건대',en: 'Seongsu · Seoul Forest · Konkuk Univ.',ja: '聖水・ソウルの森・建大入口',zh: '圣水·首尔林·建大入口'},region: 'seoul',areas: ['seongsu', 'seoul_forest', 'konkuk_univ']},
+  {id:'gangdong',label:{ko:'강동·잠실',en:'Gangdong·Jamsil',ja:'江東·蚕室',zh:'江东·蚕室'},region:'seoul'},
+  {id:'hongdae', label:{ko:'홍대·합정',en:'Hongdae·Hapjeong',ja:'弘大·合井',zh:'弘大·合井'},region:'seoul'},
+  {id:'bundang', label:{ko:'분당·판교',en:'Bundang·Pangyo',ja:'盆唐·板橋',zh:'盆唐·板桥'},region:'gyeonggi'},
+  {id:'suwon',   label:{ko:'수원·광교',en:'Suwon·Gwanggyo',ja:'水原·光敎',zh:'水原·光教'},region:'gyeonggi'},
+  {id:'other',   label:{ko:'기타 지역',en:'Other',ja:'その他',zh:'其他地区'},region:'etc'},
+];
+
+/* ══════════════════════════════════════
+   STATE — localStorage 없음, 새로고침 시 초기화
+══════════════════════════════════════ */
+let lang='ko', hookIdx=0, hookTimer=null, selectedArea=null;
+let launchDone=false;      /* 새로고침마다 false로 초기화 */
+let launchCounts={};       /* Google Sheets에서 로드 */
+let sheetLoaded=false;
+
+/* ══════════════════════════════════════
+   Google Sheets API
+══════════════════════════════════════ */
+async function loadSheetCounts(){
+  if(!SCRIPT_URL||SCRIPT_URL==='YOUR_APPS_SCRIPT_URL_HERE') return;
+  try{
+    const res=await fetch(SCRIPT_URL,{redirect:'follow'});
+    const data=await res.json();
+    if(data.success&&data.counts){
+      launchCounts=data.counts;
+      sheetLoaded=true;
+      renderLaunch();
+    }
+  }catch(e){
+    console.log('[ARVO] Sheet counts load failed:',e);
+  }
+}
+
+async function submitToSheet(areaId,areaLabel){
+  if(!SCRIPT_URL||SCRIPT_URL==='YOUR_APPS_SCRIPT_URL_HERE') return;
+  try{
+    await fetch(SCRIPT_URL,{
+      method:'POST',
+      mode:'no-cors',
+      headers:{'Content-Type':'text/plain'},
+      body:JSON.stringify({
+        areaId,
+        areaLabel,
+        lang,
+        sessionId:SESSION_ID,
+        timestamp:new Date().toISOString(),
+      }),
+    });
+  }catch(e){
+    console.log('[ARVO] Sheet submit failed:',e);
+  }
+}
+
+/* ══════════════════════════════════════
+   MARQUEE
+══════════════════════════════════════ */
+function buildTicker(items){
+  const doubled=[...items,...items];
+  document.getElementById('tickerTrack').innerHTML=doubled.map(item=>
+    `<span class="ticker-item">${item}</span><span class="ticker-sep">·</span>`
+  ).join('');
+}
+
+/* ══════════════════════════════════════
+   RENDER
+══════════════════════════════════════ */
+function render(){
+  const t=I18N[lang];
+
+  /* nav */
+  document.getElementById('navIg').textContent=t.nav.ig;
+  document.getElementById('navBlog').textContent=t.nav.blog;
+  document.getElementById('drawerIg').textContent=t.nav.ig;
+  document.getElementById('drawerBlog').textContent=t.nav.blog;
+
+  /* float 버튼 언어별 색상 */
+  document.getElementById('f-ig').textContent=t.float.ig;
+  document.getElementById('f-second').textContent=t.float.second;
+  const fs=document.getElementById('floatSecond');
+  if(lang==='ja'){fs.style.background='#06C755';fs.style.color='#fff';fs.style.boxShadow='0 4px 16px rgba(6,199,85,.25)';}
+  else if(lang==='zh'){fs.style.background='#07C160';fs.style.color='#fff';fs.style.boxShadow='0 4px 16px rgba(7,193,96,.25)';}
+  else{fs.style.background='#FEE500';fs.style.color='#3A1D1D';fs.style.boxShadow='0 4px 16px rgba(0,0,0,.13)';}
+
+  /* hero */
+  document.getElementById('h-eyebrow').textContent=t.hero.eyebrow;
+  document.getElementById('h-headline').textContent=t.hero.headline;
+  document.getElementById('h-dot').textContent=t.hero.dotLabel;
+  document.getElementById('h-sub').textContent=t.hero.sub;
+  document.getElementById('h-openbadge').textContent=t.hero.openBadge;
+  document.getElementById('h-visual-label').textContent=t.hero.visualLabel;
+
+  buildTicker(t.ticker);
+
+  /* hook */
+  document.getElementById('hook-label').textContent=t.hooks.label;
+  renderHook();renderHookDots();
+
+  /* brand */
+  document.getElementById('b-label').textContent=t.brand.label;
+  document.getElementById('b-headline').textContent=t.brand.headline;
+  document.getElementById('valGrid').innerHTML=t.brand.values.map((v,i)=>`
+    <div class="val-cell" data-letter="${v.letter}"
+      style="border-right:${i%2===0?'1px solid var(--line)':'none'};border-bottom:${i<2?'1px solid var(--line)':'none'};">
+      <span class="val-num">${v.num}</span>
+      <p class="val-title">${v.title}</p>
+      <p class="val-desc">${v.desc}</p>
+    </div>`).join('');
+
+  /* services */
+  document.getElementById('s-label').textContent=t.services.label;
+  document.getElementById('s-note').textContent=t.services.note;
+  document.getElementById('svcList').innerHTML=t.services.items.map(s=>`
+    <div class="svc-row">
+      <span class="svc-idx">${s.idx}</span>
+      <div><p class="svc-name">${s.name}</p><p class="svc-desc">${s.desc}</p></div>
+      <span class="eyebrow" style="font-size:9px;white-space:nowrap;">${t.services.cs}</span>
+    </div>`).join('');
+
+  /* launch */
+  document.getElementById('l-label').textContent=t.launch.label;
+  document.getElementById('l-headline').textContent=t.launch.headline;
+  document.getElementById('l-sub').textContent=t.launch.sub;
+  renderLaunch();
+
+  /* cta */
+  document.getElementById('c-label').textContent=t.cta.label;
+  document.getElementById('c-headline').textContent=t.cta.headline;
+  document.getElementById('c-sub').textContent=t.cta.sub;
+  document.getElementById('c-cta1').textContent=t.cta.cta1;
+  document.getElementById('c-cta2').textContent=t.cta.cta2;
+  document.getElementById('c-blog').textContent=t.cta.blog;
+
+  /* footer */
+  document.getElementById('f-langlabel').textContent=t.footer.langLabel;
+  document.getElementById('f-copy').textContent=t.footer.copy;
+  document.getElementById('f-blog').textContent=t.footer.blog;
+  document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active',b.dataset.lang===lang));
+}
+
+/* ── HOOK ── */
+function renderHook(){
+  const item=I18N[lang].hooks.items[hookIdx];
+  const m=document.getElementById('hook-main'),s=document.getElementById('hook-sub');
+  m.style.animation='none';s.style.animation='none';
+  requestAnimationFrame(()=>{
+    m.style.animation='fadeUp .45s ease both';
+    s.style.animation='fadeUp .45s .06s ease both';
+    m.textContent=item.main;s.textContent=item.sub;
+  });
+}
+function renderHookDots(){
+  const len=I18N[lang].hooks.items.length;
+  document.getElementById('hookDots').innerHTML=Array.from({length:len},(_,i)=>
+    `<button class="hook-dot" data-i="${i}" style="width:${i===hookIdx?20:4}px;background:${i===hookIdx?'var(--text)':'var(--dim)'};"></button>`
+  ).join('');
+  document.getElementById('hookDots').querySelectorAll('.hook-dot').forEach(b=>
+    b.addEventListener('click',()=>{hookIdx=+b.dataset.i;renderHook();renderHookDots();resetHookTimer();})
+  );
+}
+function nextHook(){hookIdx=(hookIdx+1)%I18N[lang].hooks.items.length;renderHook();renderHookDots();}
+function prevHook(){hookIdx=(hookIdx-1+I18N[lang].hooks.items.length)%I18N[lang].hooks.items.length;renderHook();renderHookDots();}
+function resetHookTimer(){clearInterval(hookTimer);hookTimer=setInterval(nextHook,4200);}
+resetHookTimer();
+
+let sx=0;
+const hc=document.getElementById('hookContent');
+hc.addEventListener('touchstart',e=>{sx=e.touches[0].clientX;},{passive:true});
+hc.addEventListener('touchend',e=>{const d=sx-e.changedTouches[0].clientX;if(Math.abs(d)>40){d>0?nextHook():prevHook();resetHookTimer();}});
+hc.addEventListener('mousedown',e=>{sx=e.clientX;});
+hc.addEventListener('mouseup',e=>{const d=sx-e.clientX;if(Math.abs(d)>40){d>0?nextHook():prevHook();resetHookTimer();}});
+document.getElementById('hookNext').addEventListener('click',()=>{nextHook();resetHookTimer();});
+document.getElementById('hookPrev').addEventListener('click',()=>{prevHook();resetHookTimer();});
+
+/* ── LAUNCH ── */
+function renderLaunch(){
+  const t=I18N[lang].launch;
+  const form=document.getElementById('launchForm'),done=document.getElementById('launchDone');
+
+  if(launchDone){
+    form.style.display='none';done.style.display='block';
+    const maxC=Math.max(...Object.values(launchCounts),1);
+    const top=AREAS.filter(a=>launchCounts[a.id]>0).sort((a,b)=>launchCounts[b.id]-launchCounts[a.id]).slice(0,5);
+    done.innerHTML=`
+      <p style="font-family:var(--kr);font-size:clamp(18px,2.2vw,26px);font-weight:600;margin-bottom:8px;word-break:keep-all;">${t.doneH}</p>
+      <p style="font-size:13px;color:var(--muted);line-height:1.85;margin-bottom:22px;word-break:keep-all;max-width:440px;">${t.doneS}</p>
+      ${top.length>0?`<p class="eyebrow" style="margin-bottom:12px;">${t.demandLabel}</p>
+      <div style="display:flex;flex-direction:column;gap:10px;max-width:400px;">
+        ${top.map(a=>`<div class="d-row">
+          <span style="font-size:12px;color:var(--muted);font-family:var(--kr);">${a.label[lang]||a.label.ko}</span>
+          <div class="d-track"><div class="d-fill" style="width:${Math.round((launchCounts[a.id]||0)/maxC*100)}%"></div></div>
+          <span style="font-size:11px;color:var(--dim);text-align:right;">${launchCounts[a.id]||0}</span>
+        </div>`).join('')}
+      </div>`:''}`;
+    return;
+  }
+
+  form.style.display='block';done.style.display='none';
+  form.innerHTML=['seoul','gyeonggi','etc'].map(rk=>`
+    <div style="margin-bottom:16px;">
+      <p class="eyebrow" style="margin-bottom:10px;">${t.regions[rk]}</p>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;">
+        ${AREAS.filter(a=>a.region===rk).map(area=>`
+          <button class="chip${selectedArea===area.id?' active':''}" data-id="${area.id}">
+            ${area.label[lang]||area.label.ko}
+            ${launchCounts[area.id]>0?`<span style="font-size:10px;opacity:.55;">${launchCounts[area.id]}</span>`:''}
+          </button>`).join('')}
+      </div>
+    </div>`).join('')
+    +(selectedArea==='other'?`<input id="etcInput" type="text" placeholder="${t.etcPh}"
+      style="display:block;width:100%;max-width:300px;padding:11px 14px;font-size:13px;font-family:var(--sans);
+             background:var(--bg);border:1px solid var(--line2);color:var(--text);outline:none;margin-bottom:14px;"/>`:'' )
+    +`<div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:6px;">
+        <button id="submitBtn" class="btn-p" style="opacity:${selectedArea?1:.35};cursor:${selectedArea?'pointer':'default'};">${t.submit}</button>
+        ${selectedArea?`<span style="font-size:12px;color:var(--dim);font-family:var(--sans);">${AREAS.find(a=>a.id===selectedArea)?.label[lang]||''} ${t.selected}</span>`:''}
+      </div>`;
+
+  form.querySelectorAll('.chip').forEach(b=>b.addEventListener('click',()=>{selectedArea=b.dataset.id;renderLaunch();}));
+
+  const sb=document.getElementById('submitBtn');
+  if(sb)sb.addEventListener('click',async()=>{
+    if(!selectedArea)return;
+    const etc=document.getElementById('etcInput');
+    const key=selectedArea==='other'&&etc?.value.trim()?`other_${etc.value}`:selectedArea;
+    const areaLabel=AREAS.find(a=>a.id===selectedArea)?.label[lang]||etc?.value||key;
+
+    /* Google Sheets에 저장 */
+    await submitToSheet(key,areaLabel);
+
+    /* 로컬 카운트 낙관적 업데이트 */
+    launchCounts={...launchCounts,[key]:(launchCounts[key]||0)+1};
+    launchDone=true;
+    renderLaunch();
+  });
+}
+
+/* ── NAV ── */
+window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('scrolled',window.scrollY>30));
+let dOpen=false;
+document.getElementById('hamburger').addEventListener('click',()=>{
+  dOpen=!dOpen;
+  document.getElementById('drawer').classList.toggle('open',dOpen);
+  document.body.style.overflow=dOpen?'hidden':'';
+  const b=[0,1,2].map(i=>document.getElementById('hb'+i));
+  if(dOpen){b[0].style.transform='translateY(6.5px) rotate(45deg)';b[1].style.opacity='0';b[1].style.transform='scaleX(0)';b[2].style.transform='translateY(-6.5px) rotate(-45deg)';}
+  else b.forEach(x=>{x.style.transform='none';x.style.opacity='1';});
+});
+
+/* ── LANGUAGE ── */
+document.querySelectorAll('.lang-btn').forEach(b=>b.addEventListener('click',()=>{lang=b.dataset.lang;hookIdx=0;render();}));
+
+/* ── SCROLL REVEAL ── */
+const io=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('in');}),{threshold:.07});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+/* ── INIT ── */
+render();
+loadSheetCounts();  /* Google Sheets에서 카운트 비동기 로드 */
+</script>
+</body>
+</html>

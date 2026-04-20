@@ -271,6 +271,9 @@
   <a href="http://pf.kakao.com/_ZAyxlX/chat" target="_blank" class="float-btn" id="floatSecond">
     <span class="float-icon">💬</span><span id="f-second">카카오 상담</span>
   </a>
+  <a href="https://blog.naver.com/the_arvo_studio" target="_blank" class="float-btn" id="floatBlog" style="background:#03C75A;color:#fff;box-shadow:0 4px 20px rgba(3,199,90,.3);">
+    <span class="float-icon">📝</span><span id="f-blog-btn">블로그</span>
+  </a>
 </div>
 
 <main>
@@ -433,7 +436,7 @@
 const I18N = {
   ko:{
     nav:{ig:'Instagram ↗',blog:'블로그'},
-    float:{ig:'Instagram 문의',second:'카카오 상담'},
+    float:{ig:'Instagram 문의',second:'카카오 상담',blog:'블로그'},
     hero:{eyebrow:'Personal Line & Dot Design Lab',headline:'가장 나다운\n라인을\n설계합니다',dotLabel:'0.1mm Micro Dot',sub:'가장 나다운 결이 선사하는 세련된 자신감.\n개인별 두피에 최적화된 퍼스널 모근 설계.',openBadge:'2026 · 05 · Seoul Open',visualLabel:'mm Micro Dot'},
     ticker:['Authentic','Refined','Version','Original','0.1mm Precision','Personal Design','Natural First','One Detail'],
     hooks:{label:'이런 고민, 공감하시나요?',items:[
@@ -485,7 +488,7 @@ const I18N = {
     footer:{copy:'© 2026 ARVO Studio. Seoul.',langLabel:'Language',blog:'블로그'},
   },
   en:{
-    nav:{ig:'Instagram ↗',blog:'Blog'},float:{ig:'Instagram DM',second:'KakaoTalk'},
+    nav:{ig:'Instagram ↗',blog:'Blog'},float:{ig:'Instagram DM',second:'KakaoTalk',blog:'Blog'},
     hero:{eyebrow:'Personal Line & Dot Design Lab',headline:'Design the Line\nThat\'s\nTruly You',dotLabel:'0.1mm Micro Dot',sub:'Refined confidence drawn from your true essence.\nPersonalized scalp pigmentation, optimized for your unique scalp.',openBadge:'2026 · 05 · Seoul Open',visualLabel:'mm Micro Dot'},
     ticker:['Authentic','Refined','Version','Original','0.1mm Precision','Personal Design','Natural First','One Detail'],
     hooks:{label:'Can you relate?',items:[
@@ -518,7 +521,7 @@ const I18N = {
     footer:{copy:'© 2026 ARVO Studio. Seoul.',langLabel:'Language',blog:'Blog'},
   },
   ja:{
-    nav:{ig:'Instagram ↗',blog:'ブログ'},float:{ig:'Instagram 相談',second:'LINE 相談'},
+    nav:{ig:'Instagram ↗',blog:'ブログ'},float:{ig:'Instagram 相談',second:'LINE 相談',blog:'ブログ'},
     hero:{eyebrow:'Personal Line & Dot Design Lab',headline:'あなただけの\nラインを\nデザインします',dotLabel:'0.1mm マイクロドット',sub:'あなたらしさから生まれる洗練された自信。\n個人の頭皮に最適化したパーソナル毛根デザイン。',openBadge:'2026 · 05 · ソウル Open',visualLabel:'mm マイクロドット'},
     ticker:['Authentic','Refined','Version','Original','0.1mm 精密','パーソナルデザイン','Natural First','One Detail'],
     hooks:{label:'こんなお悩み、ありませんか？',items:[
@@ -551,7 +554,7 @@ const I18N = {
     footer:{copy:'© 2026 ARVO Studio. Seoul.',langLabel:'Language',blog:'ブログ'},
   },
   zh:{
-    nav:{ig:'Instagram ↗',blog:'博客'},float:{ig:'Instagram 咨询',second:'WeChat 咨询'},
+    nav:{ig:'Instagram ↗',blog:'博客'},float:{ig:'Instagram 咨询',second:'WeChat 咨询',blog:'博客'},
     hero:{eyebrow:'Personal Line & Dot Design Lab',headline:'设计属于\n你的\n发际线',dotLabel:'0.1mm 微点技术',sub:'最真实的你所呈现的优雅自信。\n针对个人头皮定制优化的专属毛囊设计。',openBadge:'2026 · 05 · 首尔 Open',visualLabel:'mm 微点技术'},
     ticker:['Authentic','Refined','Version','Original','0.1mm 精准','个性化设计','Natural First','One Detail'],
     hooks:{label:'您有这样的烦恼吗？',items:[
@@ -600,9 +603,10 @@ function render(){
   document.getElementById('drawerBlog').textContent=t.nav.blog;
   document.getElementById('f-ig').textContent=t.float.ig;
   document.getElementById('f-second').textContent=t.float.second;
+  document.getElementById('f-blog-btn').textContent=t.float.blog;
   const fs=document.getElementById('floatSecond');
   if(lang==='ja'){fs.style.background='#06C755';fs.style.color='#fff';fs.style.boxShadow='0 4px 16px rgba(6,199,85,.3)';}
-  else if(lang==='zh'){fs.style.background='#07C160';fs.style.color='#fff';fs.style.boxShadow='0 4px 16px rgba(7,193,96,.3)';}
+  else if(lang==='zh'){fs.style.background='#576B95';fs.style.color='#fff';fs.style.boxShadow='0 4px 16px rgba(87,107,149,.35)';}
   else{fs.style.background='#FEE500';fs.style.color='#1a1400';fs.style.boxShadow='0 4px 16px rgba(254,229,0,.18)';}
 
   document.getElementById('h-eyebrow').textContent=t.hero.eyebrow;

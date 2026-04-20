@@ -265,13 +265,10 @@
 
 <!-- FLOAT CTA -->
 <div id="floatCta">
-  <a href="https://www.instagram.com/the_arvo_studio/" target="_blank" class="float-btn ig">
-    <span class="float-icon">📷</span><span id="f-ig">Instagram 문의</span>
-  </a>
   <a href="http://pf.kakao.com/_ZAyxlX/chat" target="_blank" class="float-btn" id="floatSecond">
     <span class="float-icon">💬</span><span id="f-second">카카오 상담</span>
   </a>
-  <a href="https://blog.naver.com/the_arvo_studio" target="_blank" class="float-btn" id="floatBlog" style="background:#03C75A;color:#fff;box-shadow:0 4px 20px rgba(3,199,90,.3);">
+  <a href="https://blog.naver.com/the_arvo_studio" target="_blank" class="float-btn" id="floatBlog" style="background:var(--text);color:var(--bg);box-shadow:0 4px 20px rgba(0,0,0,.5);">
     <span class="float-icon">📝</span><span id="f-blog-btn">블로그</span>
   </a>
 </div>
@@ -601,7 +598,6 @@ function render(){
   document.getElementById('navBlog').textContent=t.nav.blog;
   document.getElementById('drawerIg').textContent=t.nav.ig;
   document.getElementById('drawerBlog').textContent=t.nav.blog;
-  document.getElementById('f-ig').textContent=t.float.ig;
   document.getElementById('f-second').textContent=t.float.second;
   document.getElementById('f-blog-btn').textContent=t.float.blog;
   const fs=document.getElementById('floatSecond');

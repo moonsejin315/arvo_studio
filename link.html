@@ -1,235 +1,950 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#f5f0e8" />
-  <title>ARVO STUDIO</title>
-  <meta name="description" content="ARVO 아르보 | 서울 두피문신 SMP | 0.1mm Micro Dot" />
-  <meta property="og:title" content="ARVO STUDIO" />
-  <meta property="og:description" content="서울 두피문신 SMP · 0.1mm Micro Dot · 2026.05 Open" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=Noto+Sans+KR:wght@400;500&display=swap" rel="stylesheet" />
-  <style>
-    :root {
-      --bg:      #f5f0e8;
-      --bg2:     #ede7da;
-      --bg3:     #e4dccf;
-      --text:    #2e2620;
-      --muted:   #7a6e62;
-      --dim:     #b5a898;
-      --line:    rgba(46,38,32,.1);
-      --line2:   rgba(46,38,32,.15);
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="theme-color" content="#ffffff" />
+<title>ARVO STUDIO — 서울 두피문신 SMP</title>
+<meta name="description" content="ARVO 아르보 | 서울 두피문신 SMP | 0.1mm Micro Dot | 개인별 두피 맞춤 모근 설계" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
 
-    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
-    html,body{height:100%;}
-    body{
-      background:var(--bg);
-      color:var(--text);
-      font-family:'Noto Sans KR','Apple SD Gothic Neo',sans-serif;
-      font-weight:400;font-size:15px;
-      -webkit-font-smoothing:antialiased;
-      display:flex;align-items:center;justify-content:center;
-      min-height:100svh;
-      padding:52px 24px 60px;
-    }
+<style>
+  :root{
+    /* ── 컬러: 흑백 기반 + 카카오 옐로우만 유일한 액센트 ── */
+    --white:        #ffffff;
+    --black:        #000000;
+    --text:         #1d1d1f;   /* 시그니처 다크그레이 */
+    --text-secondary:#6e6e73;
+    --text-on-dark: #f5f5f7;
+    --text-on-dark-secondary: #a1a1a6;
+    --surface:      #f5f5f7;   /* 라이트 섹션 배경 */
+    --line:         rgba(0,0,0,.08);
+    --line-dark:    rgba(255,255,255,.12);
+    --kakao:        #FEE500;   /* 유일한 포인트 컬러 */
+    --kakao-text:   #3a1d1d;
 
-    /* 배경 그라디언트 */
-    body::before{
-      content:'';position:fixed;inset:0;
-      background:
-        radial-gradient(ellipse at 15% 15%, rgba(190,165,130,.18) 0%, transparent 55%),
-        radial-gradient(ellipse at 85% 85%, rgba(160,140,110,.14) 0%, transparent 55%);
-      pointer-events:none;z-index:0;
-    }
+    --font-display: 'Pretendard','Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+    --font-body:    'Pretendard','Inter',-apple-system,BlinkMacSystemFont,sans-serif;
 
-    .wrap{
-      position:relative;z-index:1;
-      width:100%;max-width:390px;
-      display:flex;flex-direction:column;
-      align-items:center;
-    }
+    /* ── 모바일 안전 영역 (노치 · 다이나믹 아일랜드 · 제스처 바 대응) ── */
+    --nav-h: 52px;
+    --safe-t: env(safe-area-inset-top, 0px);
+    --safe-b: env(safe-area-inset-bottom, 0px);
+    --safe-l: env(safe-area-inset-left, 0px);
+    --safe-r: env(safe-area-inset-right, 0px);
+  }
 
-    /* ── 프로필 ── */
-    .profile{
-      display:flex;flex-direction:column;
-      align-items:center;gap:14px;
-      margin-bottom:40px;text-align:center;
-    }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  html{
+    scroll-behavior:smooth;
+    -webkit-text-size-adjust:100%;
+    text-size-adjust:100%;
+    overflow-x:hidden;
+    width:100%;
+  }
+  body{
+    background:var(--white);
+    color:var(--text);
+    font-family:var(--font-body);
+    font-size:17px;
+    line-height:1.47;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    overflow-x:hidden;
+    width:100%;
+    position:relative;
+    word-break:keep-all;       /* 한글 단어 단위 줄바꿈 — 갤럭시/아이폰 공통 적용 */
+    overflow-wrap:break-word;
+    /* 기종별 좌우 노치 영역 보호 (가로 모드 등) */
+    padding-left:var(--safe-l);
+    padding-right:var(--safe-r);
+  }
+  ::selection{background:rgba(254,229,0,.4);}
+  img{max-width:100%;display:block;}
 
-    /* A 모노그램 — 동그라미 없이 텍스트만 */
-    .monogram{
-      font-family:'Playfair Display',serif;
-      font-size:36px;font-style:italic;font-weight:400;
-      color:var(--text);
-      letter-spacing:0;
-      line-height:1;
-      margin-bottom:2px;
-      opacity:.55;
-    }
+  a{
+    color:inherit;text-decoration:none;
+    -webkit-tap-highlight-color:transparent;
+    touch-action:manipulation;
+  }
+  button{
+    font-family:inherit;border:none;background:none;cursor:pointer;
+    -webkit-appearance:none;appearance:none;
+    -webkit-tap-highlight-color:transparent;
+    touch-action:manipulation; /* 더블탭 확대 방지, 즉각 반응 */
+    color:inherit;
+  }
 
-    .logo{
-      font-family:'Playfair Display',serif;
-      font-size:22px;font-style:italic;font-weight:400;
-      letter-spacing:.2em;color:var(--text);
-    }
-    .tagline{
-      font-size:12px;font-weight:400;
-      color:var(--muted);
-      letter-spacing:.06em;line-height:1.8;
-    }
-    .open-badge{
-      display:inline-flex;align-items:center;gap:9px;
-      background:var(--bg3);
-      border:1px solid var(--line2);
-      padding:8px 18px;
-      font-size:11px;font-weight:500;
-      letter-spacing:.1em;color:var(--text);
-    }
-    .open-dot{
-      width:6px;height:6px;border-radius:50%;
-      background:#6aaa7a;flex-shrink:0;
-      animation:pulse 2.2s infinite;
-    }
-    @keyframes pulse{0%,100%{opacity:.55;transform:scale(1)}50%{opacity:1;transform:scale(1.4)}}
+  .wrap{max-width:1100px;margin:0 auto;padding:0 22px;}
 
-    /* ── 섹션 레이블 ── */
-    .section-label{
-      width:100%;
-      font-size:9px;letter-spacing:.24em;text-transform:uppercase;
-      color:var(--dim);font-weight:400;
-      margin-bottom:10px;padding:0 2px;
-    }
+  /* ════════════════════════════
+     NAV — 투명 → 스크롤시 블러 화이트
+     (노치/다이나믹 아일랜드 안전 영역 자동 대응)
+  ════════════════════════════ */
+  #nav{
+    position:fixed;top:0;left:0;right:0;z-index:1000;
+    height:calc(var(--nav-h) + var(--safe-t));
+    padding-top:var(--safe-t);
+    display:flex;align-items:center;justify-content:center;
+    background:rgba(255,255,255,0);
+    backdrop-filter:saturate(180%) blur(20px);
+    -webkit-backdrop-filter:saturate(180%) blur(20px);
+    transition:background .3s ease, border-color .3s ease;
+    border-bottom:1px solid transparent;
+  }
+  #nav.scrolled{
+    background:rgba(255,255,255,.82);
+    border-color:var(--line);
+  }
+  .nav-inner{
+    width:100%;max-width:1100px;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:0 22px;
+  }
+  .nav-logo{
+    font-size:14px;font-weight:600;letter-spacing:.02em;
+    color:var(--text);
+  }
+  .nav-links{display:none;align-items:center;gap:28px;}
+  .nav-link{font-size:12px;font-weight:400;color:var(--text);opacity:.85;transition:opacity .2s;}
+  .nav-link:hover{opacity:1;}
+  .nav-cta{
+    display:inline-flex;align-items:center;justify-content:center;gap:6px;
+    background:var(--kakao);color:var(--kakao-text);
+    font-size:12px;font-weight:600;
+    min-height:30px;
+    padding:7px 16px;border-radius:980px;/* 풀 라운드 */
+    transition:transform .15s, filter .15s;
+    white-space:nowrap;
+  }
+  .nav-cta:hover{filter:brightness(1.05);transform:translateY(-1px);}
 
-    /* ── 링크 버튼 공통 ── */
-    .links{width:100%;display:flex;flex-direction:column;gap:10px;margin-bottom:12px;}
+  /* ════════════════════════════
+     HERO
+  ════════════════════════════ */
+  #hero{
+    min-height:100vh;
+    min-height:100svh;            /* 최신 브라우저 — 주소창 접힘 영향 없이 안정적 높이 */
+    display:flex;flex-direction:column;
+    align-items:center;justify-content:center;
+    text-align:center;
+    padding:calc(var(--nav-h) + var(--safe-t) + 88px) 22px 80px;
+    position:relative;
+    background:
+      radial-gradient(ellipse 80% 50% at 50% -10%, rgba(0,0,0,.035), transparent 60%),
+      var(--white);
+  }
 
-    .link-btn{
-      display:flex;align-items:center;gap:14px;
-      width:100%;padding:17px 20px;
-      text-decoration:none;
-      font-family:'Noto Sans KR',sans-serif;
-      border:1px solid var(--line);
-      transition:transform .18s, filter .15s;
-      cursor:pointer;
-    }
-    .link-btn:hover{transform:translateY(-2px);filter:brightness(.97);}
-    .link-btn:active{transform:translateY(0);filter:brightness(.94);}
+  /* QR 전단지 인식 배지 */
+  .flyer-badge{
+    display:none; /* JS로 ?from=qr 감지 시 표시 */
+    align-items:center;gap:8px;
+    background:var(--surface);
+    border:1px solid var(--line);
+    padding:8px 16px;border-radius:980px;
+    font-size:13px;font-weight:600;color:var(--text);
+    margin-bottom:20px;
+    opacity:0;animation:fadeUp .8s .02s forwards;
+  }
+  .flyer-badge .dot{
+    width:6px;height:6px;border-radius:50%;
+    background:#34c759;flex-shrink:0;
+  }
 
-    .link-icon{font-size:18px;line-height:1;flex-shrink:0;width:26px;text-align:center;}
-    .link-text{flex:1;}
-    .link-title{display:block;font-size:14px;font-weight:500;margin-bottom:2px;letter-spacing:.01em;}
-    .link-sub{display:block;font-size:11px;font-weight:400;letter-spacing:.03em;}
-    .link-arrow{font-size:12px;flex-shrink:0;opacity:.35;}
+  .hero-eyebrow{
+    font-size:13px;font-weight:600;letter-spacing:.01em;
+    color:var(--text-secondary);
+    margin-bottom:18px;
+    opacity:0;animation:fadeUp .8s .1s forwards;
+  }
 
-    /* 카카오 — 배경보다 살짝 진한 웜 베이지, 카카오 노랑은 왼쪽 선으로만 */
-    .btn-kakao{
-      background:var(--bg2);
-      border-color:var(--line);
-      border-left:3px solid #c9a520;
-      color:var(--text);
-    }
-    .btn-kakao .link-title{color:#7a5c00;}
-    .btn-kakao .link-sub{color:var(--muted);}
-    .btn-kakao .link-arrow{color:#7a5c00;opacity:.5;}
+  .hero-headline{
+    font-family:var(--font-display);
+    font-weight:700;
+    font-size:clamp(38px, 6.4vw, 88px);
+    line-height:1.05;
+    letter-spacing:-.03em;
+    color:var(--text);
+    max-width:920px;
+    word-break:keep-all;
+    margin-bottom:22px;
+    opacity:0;animation:fadeUp .9s .18s forwards;
+  }
+  .hero-headline em{
+    font-style:normal;
+    color:var(--text);
+    /* 살짝 그레이 톤으로 보조 강조 */
+    opacity:.45;
+  }
 
-    /* 홈페이지 — 배경보다 한 단계 진한 베이지, 왼쪽 선으로 구분 */
-    .btn-website{
-      background:var(--bg3);
-      border-color:var(--line);
-      border-left:3px solid var(--text);
-      color:var(--text);
-    }
-    .btn-website .link-title{color:var(--text);}
-    .btn-website .link-sub{color:var(--muted);}
-    .btn-website .link-arrow{color:var(--text);opacity:.35;}
+  .hero-sub{
+    font-size:clamp(17px, 2vw, 21px);
+    font-weight:400;
+    color:var(--text-secondary);
+    max-width:560px;
+    line-height:1.5;
+    margin-bottom:36px;
+    word-break:keep-all;
+    opacity:0;animation:fadeUp .9s .26s forwards;
+  }
 
-    /* 블로그 — 같은 계열, 왼쪽 선만 초록으로 */
-    .btn-blog{
-      background:var(--bg2);
-      border-color:var(--line);
-      border-left:3px solid #4a7c59;
-      color:var(--text);
-    }
-    .btn-blog .link-title{color:#2e5c3a;}
-    .btn-blog .link-sub{color:var(--muted);}
-    .btn-blog .link-arrow{color:#4a7c59;opacity:.6;}
+  .hero-ctas{
+    display:flex;align-items:center;gap:14px;flex-wrap:wrap;justify-content:center;
+    margin-bottom:56px;
+    opacity:0;animation:fadeUp .9s .34s forwards;
+  }
 
-    /* 구분선 */
-    .divider{width:100%;border:none;border-top:1px solid var(--line);margin:16px 0;}
+  .btn-primary{
+    display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    background:var(--kakao);color:var(--kakao-text);
+    font-size:16px;font-weight:600;
+    min-height:48px;
+    padding:13px 26px;border-radius:980px;
+    transition:transform .18s ease, filter .18s ease;
+    white-space:nowrap;
+  }
+  .btn-primary:hover{transform:translateY(-1px);filter:brightness(1.04);}
+  .btn-primary .arrow{font-size:14px;opacity:.7;}
 
-    /* 푸터 */
-    .footer{
-      margin-top:40px;
-      font-size:11px;color:var(--dim);
-      letter-spacing:.1em;text-align:center;
-      font-family:'Playfair Display',serif;font-style:italic;
-    }
+  .btn-secondary{
+    display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    background:var(--text);color:var(--white);
+    font-size:16px;font-weight:600;
+    min-height:48px;
+    padding:13px 26px;border-radius:980px;
+    transition:transform .18s ease, filter .18s ease;
+    white-space:nowrap;
+  }
+  .btn-secondary:hover{transform:translateY(-1px);filter:brightness(1.25);}
+  .btn-secondary .chev{font-size:13px;opacity:.6;}
 
-    /* 애니메이션 */
-    @keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
-    .profile        {animation:fadeUp .6s .05s ease both;}
-    .section-label  {animation:fadeUp .6s .15s ease both;}
-    .links          {animation:fadeUp .6s .20s ease both;}
-    .divider        {animation:fadeUp .6s .28s ease both;}
-    .footer         {animation:fadeUp .6s .40s ease both;}
-  </style>
+  /* 스크롤 유도 인디케이터 */
+  .scroll-cue{
+    position:absolute;bottom:32px;left:50%;transform:translateX(-50%);
+    display:flex;flex-direction:column;align-items:center;gap:8px;
+    opacity:0;animation:fadeUp .9s .5s forwards, bob 2.4s 1.4s infinite;
+  }
+  .scroll-cue-label{
+    font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--text-secondary);opacity:.6;
+  }
+  .scroll-cue-line{width:1px;height:28px;background:linear-gradient(to bottom, rgba(0,0,0,.25), transparent);}
+
+  @keyframes fadeUp{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
+  @keyframes bob{0%,100%{transform:translate(-50%,0);}50%{transform:translate(-50%,6px);}}
+
+  /* ════════════════════════════
+     PLACEHOLDER — 다음 섹션 들어올 자리
+  ════════════════════════════ */
+  #next-placeholder{
+    min-height:30vh;
+    display:flex;align-items:center;justify-content:center;
+    background:var(--surface);
+    border-top:1px solid var(--line);
+  }
+  #next-placeholder p{
+    font-size:13px;color:var(--text-secondary);
+    letter-spacing:.04em;
+  }
+
+  /* ════════════════════════════
+     STRENGTHS — ARVO만의 강점 (스펙 카드)
+  ════════════════════════════ */
+  #strengths{
+    padding:100px 0 110px;
+    background:var(--text);   /* 다크 섹션 — 흑백 리듬 전환 */
+    color:var(--white);
+  }
+  #strengths .section-eyebrow{color:rgba(255,255,255,.5);}
+  #strengths .section-headline{color:var(--white);}
+  #strengths .section-sub{color:rgba(255,255,255,.62);}
+
+  .stat-grid{
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap:1px;
+    background:rgba(255,255,255,.1);
+    margin:64px 0 0;
+    border-radius:20px;
+    overflow:hidden;
+  }
+  .stat-card{
+    background:var(--text);
+    padding:36px 26px;
+    display:flex;flex-direction:column;
+    gap:10px;
+  }
+  .stat-num{
+    font-family:var(--font-display);
+    font-weight:800;
+    font-size:clamp(40px, 5.6vw, 64px);
+    line-height:1;
+    letter-spacing:-.02em;
+    color:var(--white);
+  }
+  .stat-num .unit{font-size:.5em;font-weight:600;opacity:.7;margin-left:2px;}
+  .stat-title{font-size:15px;font-weight:600;color:var(--white);}
+  .stat-desc{
+    font-size:13px;line-height:1.65;
+    color:rgba(255,255,255,.55);
+    word-break:keep-all;
+  }
+
+  /* ── A.R.V.O 약속 ── */
+  .arvo-meaning{
+    margin-top:80px;
+    padding-top:56px;
+    border-top:1px solid rgba(255,255,255,.12);
+  }
+  .arvo-meaning-head{
+    text-align:center;margin-bottom:40px;
+  }
+  .arvo-meaning-eyebrow{
+    font-size:13px;font-weight:600;color:rgba(255,255,255,.5);
+    margin-bottom:12px;
+  }
+  .arvo-meaning-title{
+    font-family:var(--font-display);
+    font-weight:700;
+    font-size:clamp(22px, 3vw, 32px);
+    color:var(--white);
+    word-break:keep-all;
+    letter-spacing:-.02em;
+  }
+  .arvo-letters{
+    display:grid;grid-template-columns:repeat(4, 1fr);
+    gap:1px;background:rgba(255,255,255,.1);
+    border-radius:16px;overflow:hidden;
+  }
+  .arvo-letter-card{
+    background:var(--text);
+    padding:28px 16px;
+    text-align:center;
+    display:flex;flex-direction:column;align-items:center;gap:8px;
+  }
+  .arvo-letter-big{
+    font-family:var(--font-display);
+    font-size:34px;font-weight:800;
+    color:var(--white);
+    line-height:1;
+  }
+  .arvo-letter-word{
+    font-size:12px;font-weight:600;color:rgba(255,255,255,.85);
+    letter-spacing:.02em;
+  }
+  .arvo-letter-kr{
+    font-size:11.5px;color:rgba(255,255,255,.5);
+    line-height:1.5;word-break:keep-all;
+  }
+
+  /* ════════════════════════════
+     SMP란? — 공감 유도 섹션
+  ════════════════════════════ */
+  #smp{
+    padding:100px 0 96px;
+    background:var(--surface);
+  }
+  .smp-hooks{
+    max-width:680px;margin:0 auto 64px;
+  }
+  .smp-hook-item{
+    display:flex;align-items:flex-start;gap:14px;
+    padding:18px 0;
+    border-bottom:1px solid var(--line);
+  }
+  .smp-hook-item:first-child{border-top:1px solid var(--line);}
+  .smp-hook-q{
+    font-size:16px;font-weight:600;color:var(--text);
+    word-break:keep-all;line-height:1.45;
+  }
+  .smp-hook-num{
+    font-family:var(--font-display);
+    font-size:13px;font-weight:700;color:var(--text-secondary);
+    opacity:.4;
+    min-width:24px;padding-top:2px;
+  }
+
+  .smp-explain{
+    max-width:640px;margin:0 auto;
+    text-align:center;
+    padding-top:8px;
+  }
+  .smp-explain-eyebrow{
+    font-size:13px;font-weight:600;color:var(--text-secondary);
+    margin-bottom:14px;
+  }
+  .smp-explain-title{
+    font-family:var(--font-display);
+    font-weight:700;
+    font-size:clamp(24px, 3.4vw, 36px);
+    line-height:1.25;
+    letter-spacing:-.02em;
+    color:var(--text);
+    word-break:keep-all;
+    margin-bottom:20px;
+  }
+  .smp-explain-body{
+    font-size:16px;line-height:1.65;
+    color:var(--text-secondary);
+    word-break:keep-all;
+    margin-bottom:36px;
+  }
+  .smp-explain-body strong{color:var(--text);font-weight:600;}
+
+  /* 작동 원리 3단계 미니 다이어그램 */
+  .smp-steps{
+    display:flex;align-items:center;justify-content:center;
+    gap:10px;margin-bottom:40px;flex-wrap:wrap;
+  }
+  .smp-step{
+    display:flex;flex-direction:column;align-items:center;gap:8px;
+    width:96px;
+  }
+  .smp-step-icon{
+    width:56px;height:56px;border-radius:50%;
+    background:var(--white);
+    border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;
+    font-size:22px;
+  }
+  .smp-step-label{
+    font-size:12px;font-weight:600;color:var(--text);
+    text-align:center;line-height:1.4;
+  }
+  .smp-step-arrow{
+    font-size:16px;color:var(--text-secondary);opacity:.4;
+    margin-bottom:24px;
+  }
+
+  /* ════════════════════════════
+     PORTFOLIO
+  ════════════════════════════ */
+  #portfolio{
+    padding:96px 0 110px;
+    background:var(--white);
+  }
+  .portfolio-head{
+    text-align:center;
+    margin-bottom:64px;
+  }
+  .section-eyebrow{
+    font-size:13px;font-weight:600;color:var(--text-secondary);
+    margin-bottom:14px;
+  }
+  .section-headline{
+    font-family:var(--font-display);
+    font-weight:700;
+    font-size:clamp(28px, 4.2vw, 48px);
+    line-height:1.12;
+    letter-spacing:-.025em;
+    color:var(--text);
+    word-break:keep-all;
+    margin-bottom:14px;
+  }
+  .section-sub{
+    font-size:16px;color:var(--text-secondary);
+    max-width:480px;margin:0 auto;
+    line-height:1.55;word-break:keep-all;
+  }
+
+  .case-card{
+    max-width:780px;margin:0 auto 64px;
+  }
+  .case-label{
+    display:flex;align-items:baseline;justify-content:space-between;
+    margin-bottom:14px;padding:0 2px;
+    flex-wrap:wrap;gap:6px;
+  }
+  .case-name{font-size:15px;font-weight:600;color:var(--text);}
+  .case-tag{font-size:13px;color:var(--text-secondary);}
+
+  .case-compare{
+    width:100%;
+    border-radius:18px;
+    overflow:hidden;
+    background:var(--surface);
+    margin-bottom:14px;
+  }
+  .case-compare img{width:100%;display:block;}
+
+  .case-pair{
+    display:grid;grid-template-columns:1fr 1fr;
+    gap:8px;
+  }
+  .case-pair-item{
+    border-radius:14px;overflow:hidden;background:var(--surface);
+    position:relative;
+  }
+  .case-pair-item img{width:100%;display:block;}
+  .case-pair-tag{
+    position:absolute;top:10px;left:10px;
+    font-size:11px;font-weight:600;letter-spacing:.04em;
+    color:#fff;background:rgba(0,0,0,.45);
+    padding:4px 10px;border-radius:980px;
+    backdrop-filter:blur(6px);
+  }
+
+  .case-note{
+    margin-top:16px;
+    font-size:14px;color:var(--text-secondary);
+    line-height:1.6;word-break:keep-all;
+    padding:0 2px;
+  }
+
+  /* ── 썸네일 그리드 (1줄 정렬) ── */
+  .case-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:10px;
+    max-width:780px;margin:0 auto;
+  }
+  .case-thumb{
+    position:relative;
+    aspect-ratio:1/1;
+    border-radius:16px;
+    overflow:hidden;
+    background:var(--surface);
+    cursor:pointer;
+    border:none;
+    padding:0;
+    transition:transform .2s ease;
+  }
+  .case-thumb:hover{transform:translateY(-3px);}
+  .case-thumb img{
+    width:100%;height:100%;
+    object-fit:cover;object-position:50% 30%;
+    display:block;
+  }
+  .case-thumb-overlay{
+    position:absolute;inset:0;
+    background:linear-gradient(to top, rgba(0,0,0,.62) 0%, rgba(0,0,0,0) 55%);
+  }
+  .case-thumb-info{
+    position:absolute;bottom:0;left:0;right:0;
+    padding:14px 12px;
+    text-align:left;
+  }
+  .case-thumb-name{
+    font-size:12px;font-weight:700;color:#fff;
+    margin-bottom:2px;
+  }
+  .case-thumb-tag{
+    font-size:10.5px;color:rgba(255,255,255,.82);
+    line-height:1.3;
+  }
+  .case-thumb-zoom{
+    position:absolute;top:10px;right:10px;
+    width:26px;height:26px;border-radius:50%;
+    background:rgba(255,255,255,.92);
+    display:flex;align-items:center;justify-content:center;
+    font-size:12px;color:var(--text);
+  }
+
+  /* ── 모달 팝업 ── */
+  .modal-overlay{
+    position:fixed;inset:0;z-index:2000;
+    background:rgba(0,0,0,.72);
+    backdrop-filter:blur(4px);
+    -webkit-backdrop-filter:blur(4px);
+    display:none;
+    align-items:flex-start;justify-content:center;
+    padding:calc(24px + var(--safe-t)) max(16px, var(--safe-l)) calc(60px + var(--safe-b)) max(16px, var(--safe-r));
+    overflow-y:auto;
+    -webkit-overflow-scrolling:touch;
+    opacity:0;
+    transition:opacity .25s ease;
+  }
+  .modal-overlay.open{display:flex;opacity:1;}
+  .modal-panel{
+    background:var(--white);
+    border-radius:22px;
+    max-width:600px;width:100%;
+    margin-top:8px;
+    padding:22px;
+    position:relative;
+    transform:translateY(14px) scale(.98);
+    transition:transform .28s cubic-bezier(.2,.8,.2,1);
+  }
+  .modal-overlay.open .modal-panel{transform:translateY(0) scale(1);}
+  .modal-close{
+    position:absolute;top:12px;right:12px;
+    width:44px;height:44px;border-radius:50%;   /* 44px 최소 터치 영역 확보 */
+    background:var(--surface);
+    display:flex;align-items:center;justify-content:center;
+    font-size:15px;color:var(--text);
+    z-index:1;
+    transition:background .15s;
+  }
+  .modal-close:hover{background:#e8e8ea;}
+
+  /* 모달 안 case-card는 margin 제거 */
+  .modal-panel .case-card{margin:0;max-width:none;}
+  .modal-panel .case-label{padding-right:36px;}
+
+  .portfolio-cta{
+    display:flex;justify-content:center;margin-top:40px;
+  }
+
+  /* 스크롤 reveal */
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity .8s ease, transform .8s ease;}
+  .reveal.in{opacity:1;transform:translateY(0);}
+
+  /* ════════════════════════════
+     RESPONSIVE
+  ════════════════════════════ */
+  @media(min-width:734px){
+    .nav-links{display:flex;}
+    .stat-grid{grid-template-columns:repeat(4, 1fr);}
+  }
+  @media(max-width:480px){
+    .hero-ctas{flex-direction:column;width:100%;max-width:300px;}
+    .btn-primary, .btn-secondary{width:100%;justify-content:center;}
+    .case-label{flex-direction:column;align-items:flex-start;}
+    .arvo-letters{grid-template-columns:repeat(2, 1fr);}
+    .smp-steps{flex-direction:column;gap:4px;}
+    .smp-step-arrow{transform:rotate(90deg);margin:2px 0;}
+    .smp-hook-q{font-size:15px;}
+  }
+  /* 작은 화면(아이폰 SE, 구형 갤럭시 등) 안전 보강 */
+  @media(max-width:380px){
+    .wrap{padding:0 16px;}
+    .nav-inner{padding:0 16px;}
+    .case-grid{gap:7px;}
+    .case-thumb-info{padding:10px 9px;}
+    .case-thumb-name{font-size:11px;}
+    .case-thumb-tag{font-size:9.5px;}
+    .stat-card{padding:28px 18px;}
+    .stat-num{font-size:clamp(34px, 13vw, 48px);}
+    .arvo-letter-card{padding:22px 10px;}
+  }
+  /* 가로 모드(landscape) — 히어로가 화면을 넘지 않도록 */
+  @media(max-height:480px) and (orientation:landscape){
+    #hero{min-height:auto;padding-top:calc(var(--nav-h) + var(--safe-t) + 24px);padding-bottom:40px;}
+    .scroll-cue{display:none;}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important;}
+  }
+</style>
 </head>
 <body>
-<div class="wrap">
 
-  <div class="profile">
-    <div class="monogram">A</div>
-    <div class="logo">ARVO STUDIO</div>
-    <div class="tagline">
-      서울 두피문신 SMP · 0.1mm Micro Dot<br />
-      개인별 두피 맞춤 모근 설계
+<!-- ════════ NAV ════════ -->
+<nav id="nav">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">ARVO STUDIO</a>
+    <div class="nav-links">
+      <a href="#smp" class="nav-link">SMP란?</a>
+      <a href="#strengths" class="nav-link">ARVO만의 강점</a>
+      <a href="#portfolio" class="nav-link">포트폴리오</a>
     </div>
-    <div class="open-badge">
-      <span class="open-dot"></span>
-      2026 · 05 · Seoul Open
+    <a href="http://pf.kakao.com/_ZAyxlX/chat" target="_blank" class="nav-cta">카카오 상담</a>
+  </div>
+</nav>
+
+<!-- ════════ HERO ════════ -->
+<section id="hero">
+  <p class="flyer-badge" id="flyerBadge"><span class="dot"></span>전단지 보고 오셨군요</p>
+  <p class="hero-eyebrow">ARVO STUDIO · Seoul</p>
+  <h1 class="hero-headline">
+    가장 나다운 라인.<br />
+    <em>0.1mm의 정밀함으로.</em>
+  </h1>
+  <p class="hero-sub">
+    인위적이지 않은 자연스러움. 개인별 두피에 최적화된<br />
+    퍼스널 모근 설계, ARVO STUDIO.
+  </p>
+  <div class="hero-ctas">
+    <a href="http://pf.kakao.com/_ZAyxlX/chat" target="_blank" class="btn-primary">
+      카카오톡으로 상담하기 <span class="arrow">→</span>
+    </a>
+    <a href="#smp" class="btn-secondary">SMP란 무엇인가요? <span class="chev">›</span></a>
+  </div>
+
+  <div class="scroll-cue">
+    <span class="scroll-cue-label">Scroll</span>
+    <span class="scroll-cue-line"></span>
+  </div>
+</section>
+
+<!-- ════════ SMP란? — 공감 유도 섹션 ════════ -->
+<section id="smp">
+  <div class="wrap">
+
+    <!-- 1단계: 공감 질문으로 "어, 나도 그런데?" 자각시키기 -->
+    <div class="smp-hooks reveal">
+      <div class="smp-hook-item">
+        <span class="smp-hook-num">01</span>
+        <span class="smp-hook-q">사진 찍을 때 정수리 각도가 신경 쓰이기 시작했나요?</span>
+      </div>
+      <div class="smp-hook-item">
+        <span class="smp-hook-num">02</span>
+        <span class="smp-hook-q">조명이 밝은 곳에서 두피가 비칠까 봐 신경 쓰인 적 있나요?</span>
+      </div>
+      <div class="smp-hook-item">
+        <span class="smp-hook-num">03</span>
+        <span class="smp-hook-q">탈모까지는 아니지만, 예전보다 숱이 허전하게 느껴지나요?</span>
+      </div>
+    </div>
+
+    <!-- 2단계: "그게 바로 SMP가 필요한 이유예요" 로 자연스럽게 설명 진입 -->
+    <div class="smp-explain reveal">
+      <p class="smp-explain-eyebrow">SMP란?</p>
+      <h2 class="smp-explain-title">
+        모근처럼 보이는 점을<br />
+        두피에 새기는 정밀 시술
+      </h2>
+      <p class="smp-explain-body">
+        SMP(Scalp Micro Pigmentation)는 <strong>실제 모근 굵기와 동일한 0.1mm 단위의 점</strong>을
+        두피에 심어, 정수리·헤어라인의 빈 공간을 자연스럽게 채우는 비절개 시술입니다.<br /><br />
+        탈모가 아니어도, <strong>두피가 비치는 게 신경 쓰이는 정도</strong>만으로도 충분히 받으실 수 있어요.
+      </p>
+
+      <!-- 3단계: 작동 원리를 시각적으로 — 신뢰 더하기 -->
+      <div class="smp-steps">
+        <div class="smp-step">
+          <div class="smp-step-icon">🔍</div>
+          <span class="smp-step-label">두피 진단 &<br />모발 결 분석</span>
+        </div>
+        <span class="smp-step-arrow">→</span>
+        <div class="smp-step">
+          <div class="smp-step-icon">✏️</div>
+          <span class="smp-step-label">개인별<br />라인 설계</span>
+        </div>
+        <span class="smp-step-arrow">→</span>
+        <div class="smp-step">
+          <div class="smp-step-icon">•</div>
+          <span class="smp-step-label">0.1mm<br />점묘 시술</span>
+        </div>
+      </div>
+
+      <a href="#portfolio" class="btn-secondary">실제 시술 결과 보기 <span class="chev">↓</span></a>
+    </div>
+
+  </div>
+</section>
+
+<!-- ════════ PORTFOLIO ════════ -->
+<section id="portfolio">
+  <div class="wrap">
+    <div class="portfolio-head reveal">
+      <p class="section-eyebrow">Portfolio</p>
+      <h2 class="section-headline">직접 확인하는 변화</h2>
+      <p class="section-sub">
+        실제 시술 전후, 가감 없이 보여드립니다.<br />
+        사진을 누르면 자세히 볼 수 있어요.
+      </p>
+    </div>
+
+    <!-- 썸네일 1줄 그리드 — 클릭 시 모달로 비포/애프터 펼쳐짐 -->
+    <div class="case-grid reveal" id="caseGrid"></div>
+
+    <div class="portfolio-cta">
+      <a href="http://pf.kakao.com/_ZAyxlX/chat" target="_blank" class="btn-primary">
+        나도 상담받아보기 <span class="arrow">→</span>
+      </a>
     </div>
   </div>
+</section>
 
-  <p class="section-label">상담 · Consultation</p>
-  <div class="links">
-    <a href="http://pf.kakao.com/_ZAyxlX/chat" target="_blank" class="link-btn btn-kakao">
-      <span class="link-icon">💬</span>
-      <span class="link-text">
-        <span class="link-title">카카오 채널 상담</span>
-        <span class="link-sub">빠른 상담 · 사전 예약</span>
-      </span>
-      <span class="link-arrow">↗</span>
-    </a>
+<!-- ════════ 케이스 상세 모달 ════════ -->
+<div class="modal-overlay" id="caseModal">
+  <div class="modal-panel">
+    <button class="modal-close" id="modalClose" aria-label="닫기">✕</button>
+    <div class="case-card" id="modalBody"></div>
   </div>
-
-  <hr class="divider" />
-
-  <p class="section-label">콘텐츠 · Content</p>
-  <div class="links">
-    <a href="https://arvo-studio.vercel.app" target="_blank" class="link-btn btn-website">
-      <span class="link-icon">🌐</span>
-      <span class="link-text">
-        <span class="link-title">공식 홈페이지</span>
-        <span class="link-sub">브랜드 · 서비스 · 두피 진단 안내</span>
-      </span>
-      <span class="link-arrow">↗</span>
-    </a>
-
-    <a href="https://blog.naver.com/the_arvo_studio" target="_blank" class="link-btn btn-blog">
-      <span class="link-icon">📝</span>
-      <span class="link-text">
-        <span class="link-title">네이버 블로그</span>
-        <span class="link-sub">SMP 정보 · 시술 이야기</span>
-      </span>
-      <span class="link-arrow">↗</span>
-    </a>
-  </div>
-
-  <p class="footer">© 2026 ARVO Studio · Seoul</p>
-
 </div>
+
+<!-- ════════ STRENGTHS — ARVO만의 강점 ════════ -->
+<section id="strengths">
+  <div class="wrap">
+    <div class="portfolio-head reveal">
+      <p class="section-eyebrow">Why ARVO</p>
+      <h2 class="section-headline">한 끝의 차이를<br />만드는 디테일</h2>
+      <p class="section-sub">
+        두피 진단부터 마지막 한 점까지,<br />
+        ARVO는 타협하지 않습니다.
+      </p>
+    </div>
+
+    <div class="stat-grid reveal">
+      <div class="stat-card">
+        <div class="stat-num">0.1<span class="unit">mm</span></div>
+        <div class="stat-title">Micro Dot 정밀도</div>
+        <p class="stat-desc">실제 모근과 구별되지 않는 점 단위로 시술합니다.</p>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">2<span class="unit">년</span></div>
+        <div class="stat-title">무제한 A/S</div>
+        <p class="stat-desc">색이 흐려지는 속도는 사람마다 다르기에, 기간 제한 없이 보완해드립니다.</p>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">6<span class="unit">가지</span></div>
+        <div class="stat-title">AI 두피 진단</div>
+        <p class="stat-desc">미세각질·피지·모낭 상태까지 시술 전 정밀하게 분석합니다.</p>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">1:1</div>
+        <div class="stat-title">퍼스널 디자인</div>
+        <p class="stat-desc">유행이 아닌, 개인의 두상과 골격에 맞춰 라인을 설계합니다.</p>
+      </div>
+    </div>
+
+    <!-- A.R.V.O 약속 -->
+    <div class="arvo-meaning reveal">
+      <div class="arvo-meaning-head">
+        <p class="arvo-meaning-eyebrow">The Meaning of ARVO</p>
+        <h3 class="arvo-meaning-title">네 글자에 담긴<br />네 가지 약속</h3>
+      </div>
+      <div class="arvo-letters">
+        <div class="arvo-letter-card">
+          <span class="arvo-letter-big">A</span>
+          <span class="arvo-letter-word">Authentic</span>
+          <span class="arvo-letter-kr">인위적이지 않은<br />자연스러움</span>
+        </div>
+        <div class="arvo-letter-card">
+          <span class="arvo-letter-big">R</span>
+          <span class="arvo-letter-word">Refined</span>
+          <span class="arvo-letter-kr">0.1mm까지<br />타협 없는 정교함</span>
+        </div>
+        <div class="arvo-letter-card">
+          <span class="arvo-letter-big">V</span>
+          <span class="arvo-letter-word">Version</span>
+          <span class="arvo-letter-kr">당신의 가장 좋은<br />모습으로의 변화</span>
+        </div>
+        <div class="arvo-letter-card">
+          <span class="arvo-letter-big">O</span>
+          <span class="arvo-letter-word">Original</span>
+          <span class="arvo-letter-kr">유행이 아닌<br />당신만의 오리지널리티</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ 다음 섹션 자리 (placeholder) ════════ -->
+<section id="next-placeholder">
+  <p>↓ 다음 섹션 (SMP란?) 이어서 제작 예정</p>
+</section>
+
+<script>
+  // QR 전단지 인식 — URL에 ?from=qr 있으면 배지 표시
+  if (new URLSearchParams(location.search).get('from') === 'qr') {
+    document.getElementById('flyerBadge').style.display = 'inline-flex';
+  }
+
+  // 네비게이션 스크롤 상태
+  window.addEventListener('scroll', () => {
+    document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 8);
+  });
+
+  // ── 포트폴리오 케이스 데이터 ──
+  // 새 케이스 추가 시 이 배열에 객체 하나만 더 넣으면 끝
+  const CASES = [
+    {
+      id: 1,
+      name: 'Case 01',
+      tag: '20대 남성 · 정수리 밀도',
+      compare: 'images/portfolio/case1-compare.png',
+      before: 'images/portfolio/case1-before.png',
+      after: 'images/portfolio/case1-after.png',
+      note: '넓어 보이던 정수리 부분에 모근 결을 살려 점을 채워 넣어, 가르마 방향과 상관없이 자연스러운 밀도를 만들었습니다.',
+    },
+    {
+      id: 2,
+      name: 'Case 02',
+      tag: '20대 남성 · 정수리 밀도',
+      compare: 'images/portfolio/case2-compare.png',
+      before: 'images/portfolio/case2-before.png',
+      after: 'images/portfolio/case2-after.png',
+      note: '얇은 모발과 두피가 비치던 부분에 모발 결 방향에 맞춰 점을 채워, 정수리 전체의 밀도를 자연스럽게 끌어올렸습니다.',
+    },
+    {
+      id: 3,
+      name: 'Case 03',
+      tag: '30대 남성 · 정수리 밀도',
+      compare: 'images/portfolio/case3-compare.png',
+      before: 'images/portfolio/case3-before.png',
+      after: 'images/portfolio/case3-after.png',
+      note: '두피가 하얗게 비치던 정수리 전체에 모근 크기와 동일한 도트로 밀도를 채워, 자연스러운 커버를 완성했습니다.',
+    },
+  ];
+
+  // ── 썸네일 그리드 렌더 ──
+  const grid = document.getElementById('caseGrid');
+  grid.innerHTML = CASES.map(c => `
+    <button class="case-thumb" data-id="${c.id}" aria-label="${c.name} 자세히 보기">
+      <img src="${c.after}" alt="${c.name} 시술 후" loading="lazy" />
+      <div class="case-thumb-overlay"></div>
+      <span class="case-thumb-zoom">⤢</span>
+      <div class="case-thumb-info">
+        <div class="case-thumb-name">${c.name}</div>
+        <div class="case-thumb-tag">${c.tag}</div>
+      </div>
+    </button>
+  `).join('');
+
+  // 스크롤 reveal — 그리드를 채운 뒤에 관찰 시작 (빈 상태로 관찰하면 opacity:0에 고정되는 버그 방지)
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // 안전장치 — 혹시 관찰이 어떤 이유로든 실패해도 1.5초 후 무조건 표시
+  setTimeout(() => {
+    document.querySelectorAll('.reveal').forEach(el => el.classList.add('in'));
+  }, 1500);
+
+  // ── 모달 ──
+  const modal = document.getElementById('caseModal');
+  const modalBody = document.getElementById('modalBody');
+  const modalClose = document.getElementById('modalClose');
+
+  function openCase(id) {
+    const c = CASES.find(x => x.id === id);
+    if (!c) return;
+    modalBody.innerHTML = `
+      <div class="case-label">
+        <span class="case-name">${c.name}</span>
+        <span class="case-tag">${c.tag}</span>
+      </div>
+      <div class="case-compare">
+        <img src="${c.compare}" alt="${c.name} 시술 전후 비교" />
+      </div>
+      <div class="case-pair">
+        <div class="case-pair-item">
+          <span class="case-pair-tag">Before</span>
+          <img src="${c.before}" alt="${c.name} 시술 전" />
+        </div>
+        <div class="case-pair-item">
+          <span class="case-pair-tag">After</span>
+          <img src="${c.after}" alt="${c.name} 시술 후" />
+        </div>
+      </div>
+      <p class="case-note">${c.note}</p>
+    `;
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeCase() {
+    modal.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  grid.addEventListener('click', (e) => {
+    const btn = e.target.closest('.case-thumb');
+    if (btn) openCase(Number(btn.dataset.id));
+  });
+
+  modalClose.addEventListener('click', closeCase);
+  modal.addEventListener('click', (e) => { if (e.target === modal) closeCase(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeCase(); });
+</script>
+
 </body>
 </html>

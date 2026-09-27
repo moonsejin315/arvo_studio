@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics="">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  body{margin:0;background:oklch(93% 0.008 60);display:flex;justify-content:center}
+  a{color:oklch(20% 0.012 60);text-decoration:none}
+  a:hover{opacity:.7}
+  *{box-sizing:border-box}
+</style>
+<script src="./image-slot.js"></script>
+</helmet>
+
+<div style="width:100%;max-width:480px;margin:0 auto;position:relative;background:oklch(99% 0.003 60);color:oklch(22% 0.012 60);font-family:-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Pretendard','Noto Sans KR',sans-serif;padding-top:60px;padding-bottom:100px;min-height:100vh;box-shadow:0 0 60px oklch(22% 0.012 60 / .12)">
+
+  <!-- top fixed bar -->
+  <div style="position:fixed;top:0;left:0;right:0;max-width:480px;margin:0 auto;height:60px;background:oklch(99% 0.003 60 / .92);backdrop-filter:blur(10px);border-bottom:1px solid oklch(22% 0.012 60 / .08);display:flex;align-items:center;justify-content:space-between;padding:0 20px;z-index:50">
+    <div style="display:flex;align-items:center;gap:8px">
+      <image-slot id="logo" shape="circle" placeholder="LOGO" style="width:26px;height:26px;flex:none"></image-slot>
+      <span style="font:800 14px/1 -apple-system,sans-serif;letter-spacing:-.01em">ARVO STUDIO</span>
+    </div>
+    <a href="{{ kakaoUrl }}" target="_blank" style="font:700 12px/1 -apple-system,sans-serif;background:oklch(18% 0.012 60);color:oklch(99% 0.003 60);padding:9px 14px;border-radius:100px">상담하기</a>
+  </div>
+
+  <!-- bottom fixed bar -->
+  <div style="position:fixed;bottom:0;left:0;right:0;max-width:480px;margin:0 auto;background:oklch(99% 0.003 60 / .95);backdrop-filter:blur(10px);border-top:1px solid oklch(22% 0.012 60 / .08);padding:12px 20px calc(12px + env(safe-area-inset-bottom));z-index:50">
+    <div style="display:flex;gap:8px">
+      <a href="{{ telUrl }}" style="flex:0 0 34%;display:block;text-align:center;background:oklch(99% 0.003 60);color:oklch(18% 0.012 60);border:1px solid oklch(18% 0.012 60 / .2);font:800 15px/1 -apple-system,sans-serif;padding:15px;border-radius:14px">전화 상담</a>
+      <a href="{{ kakaoUrl }}" target="_blank" style="flex:1;display:block;text-align:center;background:oklch(18% 0.012 60);color:oklch(99% 0.003 60);font:800 15px/1 -apple-system,sans-serif;padding:15px;border-radius:14px;box-shadow:0 10px 22px oklch(18% 0.012 60 / .3)">카카오톡 상담하기</a>
+    </div>
+  </div>
+
+  <!-- Hero -->
+  <section data-screen-label="히어로" style="padding:36px 24px 44px;background:linear-gradient(180deg,oklch(93% 0.01 60) 0%,oklch(99% 0.003 60) 55%)">
+    <sc-if value="{{ isQR }}" hint-placeholder-val="{{ false }}">
+      <div style="display:inline-block;background:oklch(18% 0.012 60);color:oklch(99% 0.003 60);font:800 11px/1 -apple-system,sans-serif;padding:7px 12px;border-radius:100px;margin-bottom:16px">QR 방문 고객 10% 할인</div>
+    </sc-if>
+    <div style="font:800 33px/1.3 -apple-system,sans-serif;letter-spacing:-.02em;margin-bottom:14px">서울 두피문신,<br>SMP 전문</div>
+    <div style="font:500 15px/1.6 -apple-system,sans-serif;color:oklch(22% 0.012 60 / .55);margin-bottom:22px">문세진 대표원장이 상담부터 시술까지<br>처음부터 끝까지 직접 진행합니다.<br>강남 언주역 도보 1분.</div>
+    <div style="display:flex;flex-wrap:wrap;gap:6px 14px;font:600 12px/1 -apple-system,sans-serif;color:oklch(22% 0.012 60 / .5);margin-bottom:18px">
+      <span>대한두피문신전문가협회 정회원</span><span>·</span><span>SMP 1급 지도자</span>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;gap:8px">
+      <a href="https://blog.naver.com/the_arvo_studio" target="_blank" style="font:700 12px/1 -apple-system,sans-serif;background:oklch(93% 0.01 60);color:oklch(25% 0.014 60);padding:9px 14px;border-radius:100px">블로그 · 두피문신 정보</a>
+      <a href="https://www.instagram.com/the_arvo_studio/" target="_blank" style="font:700 12px/1 -apple-system,sans-serif;background:oklch(93% 0.01 60);color:oklch(25% 0.014 60);padding:9px 14px;border-radius:100px">인스타그램 · 포트폴리오</a>
+    </div>
+  </section>
+
+  <!-- Empathy -->
+  <section data-screen-label="공감 유도" style="padding:44px 24px;background:oklch(96% 0.008 60)">
+    <div style="font:800 24px/1.3 -apple-system,sans-serif;letter-spacing:-.01em;margin-bottom:6px">이런 고민 있으신가요?</div>
+    <div style="font:500 14px/1.6 -apple-system,sans-serif;color:oklch(22% 0.012 60 / .5);margin-bottom:26px">많은 분들이 아래 이유로 상담을 미루고 계셨어요.</div>
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <sc-for list="{{ empathyItems }}" as="item" hint-placeholder-count="3">
+        <div style="display:flex;align-items:flex-start;gap:14px;background:oklch(99% 0.003 60);border:1px solid oklch(22% 0.012 60 / .07);border-radius:16px;padding:16px 18px;box-shadow:0 4px 16px oklch(22% 0.012 60 / .05)">
+          <div style="width:9px;height:9px;border-radius:50%;background:oklch(18% 0.012 60);margin-top:7px;flex:none"></div>
+          <div>
+            <div style="font:700 15px/1.4 -apple-system,sans-serif;margin-bottom:3px">{{ item.title }}</div>
+            <div style="font:400 13px/1.5 -apple-system,sans-serif;color:oklch(22% 0.012 60 / .5)">{{ item.desc }}</div>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- Process -->
+  <section data-screen-label="시술 4단계" style="padding:44px 24px">
+    <div style="font:800 24px/1.3 -apple-system,sans-serif;letter-spacing:-.01em;margin-bottom:6px">시술은 이렇게 진행돼요</div>
+    <div style="font:500 14px/1.6 -apple-system,sans-serif;color:oklch(22% 0.012 60 / .5);margin-bottom:22px">상담부터 관리까지, 세진 원장이 4단계를 직접 진행합니다.</div>
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <sc-for list="{{ processSteps }}" as="p" hint-placeholder-count="4">
+        <div style="border:1px solid oklch(22% 0.012 60 / .08);border-radius:16px;overflow:hidden">
+          <button onClick="{{ p.onToggle }}" style="width:100%;border:none;background:oklch(99% 0.003 60);padding:16px 18px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;text-align:left">
+            <div style="display:flex;flex-direction:column;gap:2px">
+              <div style="font:700 15px/1.3 -apple-system,sans-serif">{{ p.title }}</div>
+              <div style="font:600 11.5px/1 -apple-system,sans-serif;color:oklch(22% 0.012 60 / .5)">{{ p.time }}</div>
+            </div>
+            <div style="font:700 16px/1 -apple-system,sans-serif;color:oklch(22% 0.012 60 / .4)">{{ p.toggleIcon }}</div>
+          </button>
+          <sc-if value="{{ p.isOpen }}" hint-placeholder-val="{{ false }}">
+            <div style="padding:0 18px 16px;font:400 13px/1.6 -apple-system,sans-serif;color:oklch(22% 0.012 60 / .55)">{{ p.desc }}</div>
+          </sc-if>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- Portfolio -->
+  <section data-screen-label="포트폴리오" style="padding:44px 24px;background:oklch(96% 0.008 60)">
+    <div style="font:800 24px/1.3 -apple-system,sans-serif;letter-spacing:-.01em;margin-bottom:6px">직접 확인하는 시술 결과</div>
+    <div style="font:500 14px/1.6 -apple-system,sans-serif;color:oklch(22% 0.012 60 / .5);margin-bottom:16px">탭하면 시술 전후를 비교해서 보실 수 있어요.</div>
+    <div style="display:flex;gap:6px;margin-bottom:16px;flex-wrap:wrap">
+      <sc-for list="{{ filters }}" as="f" hint-placeholder-count="3">
+        <button onClick="{{ f.onSelect }}" style="border:{{ f.border }};background:{{ f.bg }};color:{{ f.color }};font:700 12px/1 -apple-system,sans-serif;padding:8px 13px;border-radius:100px;cursor:pointer">{{ f.label }}</button>
+      </sc-for>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px">
+      <sc-for list="{{ cases }}" as="c" hint-placeholder-count="3">
+        <button onClick="{{ c.onOpen }}" style="border:none;padding:0;background:none;text-align:left;cursor:pointer;display:flex;flex-direction:column;gap:8px">
+          <div style="width:100%;aspect-ratio:1/1;border-radius:14px;overflow:hidden;border:1px solid oklch(22% 0.012 60 / .08);box-shadow:0 4px 14px oklch(22% 0.012 60 / .06)">
+            <image-slot id="{{ c.thumbId }}" shape="rect" placeholder="AFTER"></image-slot>
+          </div>
+          <div style="font:700 12px/1.3 -apple-system,sans-serif">{{ c.label }}</div>
+          <div style="display:flex;gap:3px;align-items:center">
+            <span style="font:500 10px/1 -apple-system,sans-serif;color:oklch(22% 0.012 60 / .4);margin-right:2px">밀도</span>
+            <sc-for list="{{ c.densityDots }}" as="d" hint-placeholder-count="3">
+              <div style="width:6px;height:6px;border-radius:50%;background:{{ d }}"></div>
+            </sc-for>
+          </div>
+        </button>
+      </sc-for>
+    </div>
+    <a href="https://www.instagram.com/the_arvo_studio/" target="_blank" style="display:block;text-align:center;margin-top:16px;font:700 13px/1 -apple-system,sans-serif;color:oklch(22% 0.012 60 / .7);border:1px solid oklch(22% 0.012 60 / .15);border-radius:100px;padding:12px">더 많은 포트폴리오 확인하기 (Instagram)</a>
+  </section>
+
+  <!-- Portfolio modal -->
+  <sc-if value="{{ hasActiveCase }}" hint-placeholder-val="{{ false }}">
+    <div style="position:fixed;inset:0;background:oklch(15% 0.01 60 / .6);z-index:100;display:flex;align-items:center;justify-content:center;padding:20px" onClick="{{ closeCase }}">
+      <div style="background:oklch(99% 0.003 60);border-radius:20px;max-width:480px;width:100%;padding:22px;position:relative" onClick="{{ stop }}">
+        <div style="position:absolute;top:18px;right:18px;width:22px;height:22px;cursor:pointer" onClick="{{ closeCase }}">
+          <div style="position:absolute;top:10px;left:2px;width:18px;height:2px;background:oklch(22% 0.012 60);transform:rotate(45deg)"></div>
+          <div style="position:absolute;top:10px;left:2px;width:18px;height:2px;background:oklch(22% 0.012 60);transform:rotate(-45deg)"></div>
+        </div>
+        <div style="font:800 17px/1.3 -apple-system,sans-serif;margin-bottom:16px">{{ activeCase.label }}</div>
+        <div style="display:flex;gap:10px">
+          <div style="flex:1">
+            <div style="aspect-ratio:3/4;border-radius:12px;overflow:hidden;border:1px solid oklch(22% 0.012 60 / .08);margin-bottom:6px">
+              <image-slot id="{{ activeCase.beforeId }}" shape="rect" placeholder="BEFORE"></image-slot>
+            </div>
+            <div style="text-align:center;font:700 11px/1 -apple-system,sans-serif;color:oklch(22% 0.012 60 / .45)">시술 전</div>
+          </div>
+          <div style="flex:1">
+            <div style="aspect-ratio:3/4;border-radius:12px;overflow:hidden;border:1px solid oklch(22% 0.012 60 / .08);margin-bottom:6px">
+              <image-slot id="{{ activeCase.afterId }}" shape="rect" placeholder="AFTER"></image-slot>
+            </div>
+            <div style="text-align:center;font:700 11px/1 -apple-system,sans-serif;color:oklch(22% 0.012 60 / .45)">시술 후</div>
+          </div>
+        </div>
+        <div style="margin-top:14px;font:400 12px/1.5 -apple-system,sans-serif;color:oklch(22% 0.012 60 / .4)">실제 고객 사례이며, 결과는 개인차가 있을 수 있습니다.</div>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- Strengths -->
+  <section data-screen-label="강점" style="padding:44px 0">
+    <div style="padding:0 24px;margin-bottom:22px">
+      <div style="font:800 24px/1.3 -apple-system,sans-serif;letter-spacing:-.01em;margin-bottom:6px">ARVO STUDIO가 다른 점</div>
+      <div style="font:500 14px/1.6 -apple-system,sans-serif;color:oklch(22% 0.012 60 / .5)">1인 원장 직접 시술로 시작부터 끝까지 책임집니다.</div>
+    </div>
+    <div style="display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding:0 24px 6px">
+      <sc-for list="{{ strengths }}" as="s" hint-placeholder-count="4">
+        <div style="flex:0 0 68%;scroll-snap-align:start;background:oklch(96% 0.008 60);border:1px solid oklch(22% 0.012 60 / .07);border-radius:18px;padding:20px;box-shadow:0 6px 18px oklch(22% 0.012 60 / .06)">
+          <div style="width:24px;height:24px;border-radius:8px;background:oklch(18% 0.012 60);margin-bottom:14px"></div>
+          <div style="font:700 16px/1.3 -apple-system,sans-serif;margin-bottom:6px">{{ s.title }}</div>
+          <div style="font:400 13px/1.5 -apple-system,sans-serif;color:oklch(22% 0.012 60 / .5)">{{ s.desc }}</div>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- AI Chatbot -->
+  <section data-screen-label="AI 상담" style="padding:44px 24px">
+    <div style="font:800 24px/1.3 -apple-system,sans-serif;letter-spacing:-.01em;margin-bottom:6px">간편 AI 상담</div>
+    <div style="font:500 14px/1.6 -apple-system,sans-serif;color:oklch(22% 0.012 60 / .5);margin-bottom:20px">간단한 질문이지만 직접 물어보기에는 부담스러우시다면 <br>AI에게 먼저 물어보세요.</div>
+
+    <sc-if value="{{ chatAvailable }}" hint-placeholder-val="{{ true }}">
+      <div style="border:1px solid oklch(22% 0.012 60 / .08);border-radius:18px;overflow:hidden;box-shadow:0 6px 20px oklch(22% 0.012 60 / .06)">
+        <div style="max-height:340px;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:10px;background:oklch(96% 0.008 60)">
+          <sc-for list="{{ chatMessages }}" as="m" hint-placeholder-count="1">
+            <div style="display:flex;justify-content:{{ m.align }}">
+              
+            <div style="max-width: 80%; padding: 10px 14px; border-radius: 14px; font: 400 13.5px/1.5 -apple-system,sans-serif; background: {{ m.bg }}; color: {{ m.color }}; border: {{ m.border }}; width: 344px; height: 62px">{{ m.content }}</div></div>
+          </sc-for>
+          <sc-if value="{{ chatLoading }}" hint-placeholder-val="{{ false }}">
+            <div style="display:flex;justify-content:flex-start">
+              <div style="padding:10px 14px;border-radius:14px;background:oklch(99% 0.003 60);border:1px solid oklch(22% 0.012 60 / .08);font:400 13px/1 -apple-system,sans-serif;color:oklch(22% 0.012 60 / .4)">답변 작성 중...</div>
+            </div>
+          </sc-if>
+          <sc-if value="{{ chatError }}" hint-placeholder-val="{{ false }}">
+            <div style="display:flex;justify-content:flex-start">
+              <div style="padding:10px 14px;border-radius:14px;background:oklch(96% 0.02 30);color:oklch(35% 0.05 30);font:400 13px/1.5 -apple-system,sans-serif">{{ chatError }}</div>
+            </div>
+          </sc-if>
+        </div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;padding:12px 14px 0;background:oklch(99% 0.003 60)">
+          <sc-for list="{{ quickChips }}" as="q" hint-placeholder-count="4">
+            <button onClick="{{ q.onSend }}" style="border:1px solid oklch(22% 0.012 60 / .12);background:none;color:oklch(22% 0.012 60 / .65);font:600 11px/1 -apple-system,sans-serif;padding:8px 12px;border-radius:100px;cursor:pointer">{{ q.text }}</button>
+          </sc-for>
+        </div>
+        <div style="display:flex;gap:8px;padding:14px;background:oklch(99% 0.003 60)">
+          <input value="{{ chatInput }}" onChange="{{ setChatInput }}" onKeyDown="{{ onChatKeyDown }}" placeholder="궁금한 점을 입력해주세요" style="flex:1;min-width:0;border:1px solid oklch(22% 0.012 60 / .12);border-radius:100px;padding:11px 16px;font:400 13.5px/1 -apple-system,sans-serif;outline:none">
+          <button onClick="{{ sendChat }}" style="border:none;background:oklch(18% 0.012 60);color:oklch(99% 0.003 60);font:700 13px/1 -apple-system,sans-serif;padding:11px 18px;border-radius:100px;cursor:pointer;flex:none">전송</button>
+        </div>
+      </div>
+    </sc-if>
+    <sc-if value="{{ chatUnavailable }}" hint-placeholder-val="{{ false }}">
+      <div style="border:1px solid oklch(22% 0.012 60 / .08);border-radius:18px;padding:24px;text-align:center">
+        <div style="font:600 14px/1.6 -apple-system,sans-serif;color:oklch(22% 0.012 60 / .6);margin-bottom:14px">AI 상담 기능을 사용할 수 없어요.<br>카카오톡으로 편하게 문의해주세요.</div>
+        <a href="{{ kakaoUrl }}" target="_blank" style="display:inline-block;background:oklch(18% 0.012 60);color:oklch(99% 0.003 60);font:700 13px/1 -apple-system,sans-serif;padding:12px 20px;border-radius:100px">카카오톡 상담하기</a>
+      </div>
+    </sc-if>
+  </section>
+
+  <!-- FAQ -->
+  <section data-screen-label="FAQ" style="padding:44px 24px;background:oklch(96% 0.008 60)">
+    <div style="font:800 24px/1.3 -apple-system,sans-serif;letter-spacing:-.01em;margin-bottom:6px">자주 묻는 질문</div>
+    <div style="font:500 14px/1.6 -apple-system,sans-serif;color:oklch(22% 0.012 60 / .5);margin-bottom:22px">더 궁금한 점은 AI 상담이나 카카오톡으로 편하게 물어보세요.</div>
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <sc-for list="{{ faqs }}" as="q" hint-placeholder-count="4">
+        <div style="border:1px solid oklch(22% 0.012 60 / .08);border-radius:16px;overflow:hidden">
+          <button onClick="{{ q.onToggle }}" style="width:100%;border:none;background:oklch(99% 0.003 60);padding:16px 18px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;text-align:left">
+            <div style="font:700 14px/1.4 -apple-system,sans-serif">{{ q.q }}</div>
+            <div style="font:700 16px/1 -apple-system,sans-serif;color:oklch(22% 0.012 60 / .4);flex:none;margin-left:10px">{{ q.toggleIcon }}</div>
+          </button>
+          <sc-if value="{{ q.isOpen }}" hint-placeholder-val="{{ false }}">
+            <div style="padding:0 18px 16px;font:400 13px/1.6 -apple-system,sans-serif;color:oklch(22% 0.012 60 / .55)">{{ q.a }}</div>
+          </sc-if>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- Pricing -->
+  <section data-screen-label="가격 안내" style="padding:44px 24px">
+    <div style="font:800 24px/1.3 -apple-system,sans-serif;letter-spacing:-.01em;margin-bottom:22px">가격 안내</div>
+    <div style="background:oklch(96% 0.008 60);border:1px solid oklch(22% 0.012 60 / .07);border-radius:20px;padding:28px 22px;box-shadow:0 8px 24px oklch(22% 0.012 60 / .07)">
+      <div style="font:800 26px/1.2 -apple-system,sans-serif;letter-spacing:-.01em;margin-bottom:8px">1cm × 1cm당 10,000원</div>
+      <div style="font:400 13.5px/1.6 -apple-system,sans-serif;color:oklch(22% 0.012 60 / .5);margin-bottom:18px">3회 시술을 기준으로 예상 견적을 안내드리며, 정확한 비용은 상담을 통해 확인하실 수 있어요.</div>
+      <div style="display:flex;flex-direction:column;gap:8px;border-top:1px solid oklch(22% 0.012 60 / .07);padding-top:16px">
+        <div style="font:500 13px/1.5 -apple-system,sans-serif;color:oklch(22% 0.012 60 / .6)">· 만족하실 때까지 3~5회 진행, 추가 비용 없음</div>
+        <div style="font:500 13px/1.5 -apple-system,sans-serif;color:oklch(22% 0.012 60 / .6)">· 완료 후 2년 내 2회 무료 리터치</div>
+      </div>
+      <sc-if value="{{ isQR }}" hint-placeholder-val="{{ false }}">
+        <div style="margin-top:16px;display:inline-block;background:oklch(18% 0.012 60);color:oklch(99% 0.003 60);font:800 11px/1 -apple-system,sans-serif;padding:7px 12px;border-radius:100px">QR 방문 고객 10% 할인 적용</div>
+      </sc-if>
+    </div>
+  </section>
+
+  <!-- Trust -->
+  <section data-screen-label="신뢰 요소" style="padding:44px 24px;background:oklch(96% 0.008 60)">
+    <div style="font:800 24px/1.3 -apple-system,sans-serif;letter-spacing:-.01em;margin-bottom:6px">믿을 수 있는 이유</div>
+    <div style="font:500 14px/1.6 -apple-system,sans-serif;color:oklch(22% 0.012 60 / .5);margin-bottom:22px">아웃소싱 없이, 대표원장이 상담부터 시술·A/S까지 직접 진행합니다.</div>
+    <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:24px">
+      <sc-for list="{{ trustBadges }}" as="b" hint-placeholder-count="3">
+        <div style="display:flex;align-items:center;gap:12px;border:1px solid oklch(22% 0.012 60 / .08);border-radius:14px;padding:14px 16px;background:oklch(99% 0.003 60)">
+          <div style="width:9px;height:9px;border-radius:50%;background:oklch(18% 0.012 60);flex:none"></div>
+          <div style="font:600 13.5px/1.4 -apple-system,sans-serif">{{ b }}</div>
+        </div>
+      </sc-for>
+    </div>
+    <div style="border-top:1px solid oklch(22% 0.012 60 / .08);padding-top:20px">
+      <div style="aspect-ratio:16/8;border-radius:14px;background:oklch(99% 0.003 60);border:1px solid oklch(22% 0.012 60 / .08);display:flex;align-items:center;justify-content:center;color:oklch(22% 0.012 60 / .35);margin-bottom:14px">
+        <span style="font:600 12px/1 -apple-system,sans-serif">지도 영역 · 주소 확정 후 연결</span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <div style="font:500 13px/1.6 -apple-system,sans-serif;color:oklch(22% 0.012 60 / .45)">주소 · 서울 강남구 언주역 인근 (도보 1분) — 정확한 주소를 입력해주세요</div>
+        <a href="{{ telUrl }}" style="font:500 13px/1.6 -apple-system,sans-serif;color:oklch(22% 0.012 60 / .6);text-decoration:underline">전화번호 · 010-4146-3328</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section data-screen-label="최종 CTA" style="padding:56px 24px 64px;background:oklch(14% 0.012 60);color:oklch(99% 0.003 60);text-align:center">
+    <div style="font:800 25px/1.35 -apple-system,sans-serif;letter-spacing:-.01em;margin-bottom:10px">지금, 편하게 물어보세요</div>
+    <div style="font:400 14px/1.6 -apple-system,sans-serif;color:oklch(99% 0.003 60 / .55);margin-bottom:26px">정확한 견적은 상담을 통해 안내드립니다.</div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:10px;margin-bottom:26px">
+      <a href="{{ kakaoUrl }}" target="_blank" style="display:block;width:100%;max-width:280px;background:oklch(99% 0.003 60);color:oklch(14% 0.012 60);font:800 15px/1 -apple-system,sans-serif;padding:16px 30px;border-radius:100px">카카오톡 상담하기</a>
+      <a href="{{ telUrl }}" style="display:block;width:100%;max-width:280px;border:1px solid oklch(99% 0.003 60 / .35);color:oklch(99% 0.003 60);font:800 15px/1 -apple-system,sans-serif;padding:16px 30px;border-radius:100px">전화 상담하기</a>
+    </div>
+    <div style="font:400 11.5px/1.6 -apple-system,sans-serif;color:oklch(99% 0.003 60 / .35)">ⓒ ARVO STUDIO · 서울 강남구 언주역 도보 1분</div>
+  </section>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = {
+    isQR: false,
+    activeCaseId: null,
+    activeFilter: 'all',
+    openProcessId: 'consult',
+    openFaqId: null,
+    chatMessages: [
+      { role: 'assistant', content: '안녕하세요, ARVO STUDIO입니다. SMP 시술이나 \n회복 과정 등 두피문신에 대해 궁금한 점을 편하게 물어보세요.' }
+    ],
+    chatInput: '',
+    chatLoading: false,
+    chatError: null,
+    chatAvailable: true
+  };
+
+  KAKAO_URL = 'http://pf.kakao.com/_ZAyxlX/chat';
+  PHONE = '010-4146-3328';
+
+  SYSTEM_PROMPT = [
+    '당신은 ARVO STUDIO(서울 강남 언주역, SMP 두피문신 전문)의 AI 상담 도우미입니다.',
+    '답변 가능한 범위: SMP(두피 문신)란 무엇인지, 시술 과정, 회복 기간, 통증 정도, 관리 방법, ARVO STUDIO의 신뢰 정보(세진 원장이 1인으로 상담부터 시술까지 직접 진행하며 아웃소싱이 없음, 대한두피문신전문가협회 정회원, SMP 1급 지도자 자격, Pro Master / Master Course 수료), 가격 원칙(1cm×1cm당 1만원 기준으로 3회 시술 견적을 안내하며 정확한 금액은 상담이 필요함).',
+    '답변 불가 항목(정확한 견적, 개인별 탈모 유형·알러지 판단, 의료적 진단이 필요한 질문)은 "정확한 상담이 필요해요, 카카오톡으로 편하게 문의주세요 🙂" 같은 톤으로 상담을 안내하세요.',
+    '브랜드와 무관한 질문에는 정중히 SMP 관련 문의로 안내하세요.',
+    '톤: 신뢰감 있고 절제된 표현. 이모지는 답변당 최대 1개. 답변은 2~4문장으로 간결하게 작성하세요.'
+  ].join('\n');
+
+  cases = [
+    { id: 'part1', label: '여성 가르마 1', area: 'part', density: 2, thumbId: 'part1-after', beforeId: 'part1-before', afterId: 'part1-after' },
+    { id: 'part2', label: '여성 가르마 2', area: 'part', density: 2, thumbId: 'part2-after', beforeId: 'part2-before', afterId: 'part2-after' },
+    { id: 'part3', label: '여성 가르마 3', area: 'part', density: 3, thumbId: 'part3-after', beforeId: 'part3-before', afterId: 'part3-after' },
+    { id: 'crown1', label: '남성 크라운 1', area: 'crown', density: 3, thumbId: 'crown1-after', beforeId: 'crown1-before', afterId: 'crown1-after' },
+    { id: 'crown2', label: '남성 크라운 2', area: 'crown', density: 3, thumbId: 'crown2-after', beforeId: 'crown2-before', afterId: 'crown2-after' },
+    { id: 'crown3', label: '남성 크라운 3', area: 'crown', density: 2, thumbId: 'crown3-after', beforeId: 'crown3-before', afterId: 'crown3-after' },
+    { id: 'hairline1', label: '헤어라인 교정 1', area: 'hairline', density: 2, thumbId: 'hairline1-after', beforeId: 'hairline1-before', afterId: 'hairline1-after' },
+    { id: 'hairline2', label: '헤어라인 교정 2', area: 'hairline', density: 2, thumbId: 'hairline2-after', beforeId: 'hairline2-before', afterId: 'hairline2-after' },
+    { id: 'hairline3', label: '헤어라인 교정 3', area: 'hairline', density: 3, thumbId: 'hairline3-after', beforeId: 'hairline3-before', afterId: 'hairline3-after' }
+  ];
+
+  filterOptions = [
+    { key: 'all', label: '전체' },
+    { key: 'part', label: '가르마' },
+    { key: 'crown', label: '정수리' },
+    { key: 'hairline', label: '헤어라인' }
+  ];
+
+  processSteps = [
+    { id: 'consult', title: '1. 상담', time: '약 20분', desc: '두피 상태와 원하시는 결과를 함께 확인합니다.' },
+    { id: 'design', title: '2. 디자인', time: '약 10분', desc: '헤어라인과 밀도를 1:1로 설계합니다.' },
+    { id: 'procedure', title: '3. 시술', time: '2~3 시간', desc: '대표원장이 상담부터 시술까지 직접 진행합니다.' },
+    { id: 'care', title: '4. 사후 관리', time: '회복 7~10일', desc: '관리 방법과 다음 회차 일정을 안내드립니다.' }
+  ];
+
+  faqItems = [
+    { id: 'pain', q: '시술이 많이 아픈가요?', a: '마취 크림을 사용해 대부분 미미한 통증만 느끼십니다. 통증에 대한 개인차가 있어 정확한 안내는 상담에서 드립니다.' },
+    { id: 'duration', q: '효과는 얼마나 유지되나요?', a: '개인 피부 타입과 생활 습관에 따라 다르며, 완료 후 2년 내 2회 무료 리터치로 관리해드립니다.' },
+    { id: 'sessions', q: '몇 회 정도 진행하나요?', a: '가격은 3회 시술 기준으로 견적을 안내드리며, 만족하실 때까지 3~5회까지 추가 비용 없이 진행합니다.' },
+    { id: 'unfit', q: '시술이 어려운 경우도 있나요?', a: '피부 질환, 알러지, 임신 등 개별 조건에 따라 다를 수 있어 상담에서 정확히 확인해드립니다.' }
+  ];
+
+  empathyItems = [
+    { title: '정수리·가르마 숱 부족', desc: '빗질할 때마다 신경 쓰이는 두피 노출' },
+    { title: '모발이식 흉터', desc: '이식 후에도 남아있는 흉터 라인' },
+    { title: '탈모로 인한 자신감 저하', desc: '사진, 모자, 스타일링까지 신경 쓰이는 일상' }
+  ];
+
+  strengths = [
+    { title: '정밀 시술', desc: '모발 방향과 밀도까지 고려한 시술' },
+    { title: 'A/S 정책', desc: '완료 후 2년 내 2회 무료 리터치' },
+    { title: 'AI 두피진단', desc: '데이터 기반으로 정밀하게 설계' },
+    { title: '1:1 맞춤 디자인', desc: '얼굴형과 헤어라인에 맞춘 디자인' }
+  ];
+
+  trustBadges = [
+    '대한두피문신전문가협회 정회원',
+    '대한두피문신전문가협회 SMP 1급 지도자 자격',
+    '대한두피문신전문가협회 프로 마스터 교육 수료',
+    '대한두피문신전문가협회 마스터 교육 수료',
+    "Milady's Advanced SMP Course"
+  ];
+  quickChipTexts = ['시술 과정이 궁금해요', '회복 기간은 얼마나 걸려요?', '많이 아팠나요?', '가격이 어떻게 되나요?'];
+
+  componentDidMount() {
+    try {
+      const params = new URLSearchParams(window.location.search);
+      if (params.get('from') === 'qr') this.setState({ isQR: true });
+    } catch (e) {}
+    this.setState({ chatAvailable: !!(window.claude && typeof window.claude.complete === 'function') });
+  }
+
+  setFilter = (key) => this.setState({ activeFilter: key });
+  toggleProcess = (id) => this.setState(s => ({ openProcessId: s.openProcessId === id ? null : id }));
+  toggleFaq = (id) => this.setState(s => ({ openFaqId: s.openFaqId === id ? null : id }));
+  openCase = (id) => this.setState({ activeCaseId: id });
+  closeCase = () => this.setState({ activeCaseId: null });
+  setChatInput = (e) => this.setState({ chatInput: e.target.value });
+  onChatKeyDown = (e) => { if (e.key === 'Enter') this.sendChat(); };
+
+  sendChat = async (presetText) => {
+    const t = (typeof presetText === 'string' ? presetText : this.state.chatInput).trim();
+    if (!t || this.state.chatLoading) return;
+    const nextMessages = [...this.state.chatMessages, { role: 'user', content: t }];
+    this.setState({ chatMessages: nextMessages, chatInput: '', chatLoading: true, chatError: null });
+    try {
+      const reply = await window.claude.complete({
+        system: this.SYSTEM_PROMPT,
+        messages: nextMessages.map(m => ({ role: m.role, content: m.content })),
+        max_tokens: 400
+      });
+      this.setState(s => ({ chatMessages: [...s.chatMessages, { role: 'assistant', content: reply || '' }], chatLoading: false }));
+    } catch (e) {
+      this.setState({ chatLoading: false, chatError: '답변을 가져오지 못했어요. 카카오톡으로 문의해주세요 🙂' });
+    }
+  };
+
+  renderVals() {
+    const activeCase = this.cases.find(c => c.id === this.state.activeCaseId) || null;
+    const visibleCases = this.state.activeFilter === 'all' ? this.cases : this.cases.filter(c => c.area === this.state.activeFilter);
+    const dotFilled = 'oklch(18% 0.012 60)';
+    const dotEmpty = 'oklch(22% 0.012 60 / .15)';
+    return {
+      isQR: this.state.isQR,
+      kakaoUrl: this.KAKAO_URL,
+      telUrl: 'tel:' + this.PHONE.replace(/[^0-9+]/g, ''),
+      phoneLabel: this.PHONE,
+      filters: this.filterOptions.map(f => {
+        const active = this.state.activeFilter === f.key;
+        return {
+          ...f,
+          onSelect: () => this.setFilter(f.key),
+          bg: active ? 'oklch(18% 0.012 60)' : 'oklch(99% 0.003 60)',
+          color: active ? 'oklch(99% 0.003 60)' : 'oklch(22% 0.012 60 / .6)',
+          border: active ? 'none' : '1px solid oklch(22% 0.012 60 / .15)'
+        };
+      }),
+      cases: visibleCases.map(c => ({
+        ...c,
+        onOpen: () => this.openCase(c.id),
+        densityDots: [1, 2, 3].map(n => n <= c.density ? dotFilled : dotEmpty)
+      })),
+      processSteps: this.processSteps.map(p => ({
+        ...p,
+        isOpen: this.state.openProcessId === p.id,
+        toggleIcon: this.state.openProcessId === p.id ? '−' : '+',
+        onToggle: () => this.toggleProcess(p.id)
+      })),
+      faqs: this.faqItems.map(q => ({
+        ...q,
+        isOpen: this.state.openFaqId === q.id,
+        toggleIcon: this.state.openFaqId === q.id ? '−' : '+',
+        onToggle: () => this.toggleFaq(q.id)
+      })),
+      empathyItems: this.empathyItems,
+      strengths: this.strengths,
+      trustBadges: this.trustBadges,
+      activeCase,
+      hasActiveCase: !!activeCase,
+      closeCase: this.closeCase,
+      stop: (e) => e.stopPropagation(),
+      chatMessages: this.state.chatMessages.map(m => ({
+        content: m.content,
+        align: m.role === 'user' ? 'flex-end' : 'flex-start',
+        bg: m.role === 'user' ? 'oklch(18% 0.012 60)' : 'oklch(99% 0.003 60)',
+        color: m.role === 'user' ? 'oklch(99% 0.003 60)' : 'oklch(22% 0.012 60)',
+        border: m.role === 'user' ? 'none' : '1px solid oklch(22% 0.012 60 / .08)'
+      })),
+      chatInput: this.state.chatInput,
+      chatLoading: this.state.chatLoading,
+      chatError: this.state.chatError,
+      chatAvailable: this.state.chatAvailable,
+      chatUnavailable: !this.state.chatAvailable,
+      quickChips: this.quickChipTexts.map(text => ({ text, onSend: () => this.sendChat(text) })),
+      setChatInput: this.setChatInput,
+      sendChat: () => this.sendChat(),
+      onChatKeyDown: this.onChatKeyDown
+    };
+  }
+}
+
+</script>
+</body>
+</html>
